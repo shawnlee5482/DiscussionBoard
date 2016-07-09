@@ -19,17 +19,20 @@
           <tr ng-repeat='topic in topics | filter: {"topic" : keyword} | orderBy: "-date" '>
               <td ng-bind='topic.category'></td>
               <td><a ng-href="/#topic/{{topic._id}}">{{topic.topic}}</a></td>
-              <td><a ng-href="/#user/{{topic._user}}">{{topic._user.name}}</a></td>
+              <td><a ng-href="/#user/{{topic._user._id}}">{{topic._user.name}}</a></td>
               <td ng-bind='topic._post.length'></td>
           </tr>
       </tbody>
   </table>
   <h3>Add a New Topic</h3>
   Topic<br>
-  <input type="text" ng-model="topicName" placeholder="Name the topic"><br>
-  Description<br>
-  <textarea rows="5" cols="30" ng-model="topicDescription" placeholder="Describe your topic here"></textarea><br>
-  Category<select ng-model="topicCategory" ng-init="topicCategories = ['General', 'Product', 'QnA', 'Discussion', 'Misc']" ng-options="topicCategory for topicCategory in topicCategories"></select> <br>
-  <input type="submit" ng-click="addTopic()">  
+  <form name="newTopicForm" novalidate>
+    <input type="text" ng-model="topicName" placeholder="Name the topic" required><br>
+    Description<br>
+    <textarea rows="5" cols="30" ng-model="topicDescription" placeholder="Describe your topic here" required></textarea><br>
+    Category<select ng-model="topicCategory" ng-init="topicCategories = ['General', 'Product', 'QnA', 'Discussion', 'Misc']" ng-options="topicCategory for topicCategory in topicCategories" required></select> <br>
+    <input type="submit" ng-disabled="!newTopicForm.$valid" ng-click="addTopic()"> 
+    <label ng-show="!newTopicForm.$valid" class="warning">Input all necessary fields</label> 
+  </form>
   </div>
 </div>

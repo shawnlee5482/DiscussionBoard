@@ -1,7 +1,9 @@
 <div ng-controller="loginController">
   <h3>Hello!</h3>
-  <h3>Please enter your name to join and share your ideas</h3> 
-  <input type="text" ng-model="loginName" placeholder="Enter your name here">
-  <input type="submit" ng-click="login()">
+  <h3>Please enter your name to join and share your ideas</h3>
+  <form name="loginForm" novalidate> 
+	  <input type="text" ng-model="loginName" placeholder="Enter your name here" required>
+	  <input ng-disabled="!loginForm.$valid" type="submit" ng-click="login()">
+  </form>
 <!--   <label ng-bind='getLoggedUser()'></label> -->
 </div>

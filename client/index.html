@@ -46,9 +46,9 @@
         factory.addUser = function(name, callback) {
           // should store at db
             $http.post('/users', {name: name}).success(function(output) {
-                callback(output);  //output is the complete user list
                 factory.loggedUser = output;
-                console.log('registered user info = ', output); 
+                console.log('registered user info = ', output);               
+                callback(output);  //output is the complete user list
             });
         }
 
@@ -147,7 +147,9 @@
     myApp.controller('dashboardController', function($scope, loginFactory, topicFactory, $location) {
 
       $scope.getLoggedUser = function() {
-          return loginFactory.getLoggedUser();
+        if(!loginFactory.getLoggedUser()) {
+          $location.url('/login');
+        } else return loginFactory.getLoggedUser();
       };
 
       $scope.addTopic = function() {
@@ -173,16 +175,11 @@
     myApp.controller('loginController', function ($scope, loginFactory, $location)
     {
       $scope.login = function() {
-        if(!$scope.loginName) {
-          alert("You should input name");
-          $location.url('/');
-          return;
-        }
         loginFactory.addUser($scope.loginName, function(data) {
+          // now move to dashboard  
+          $location.url('/dashboard');          
         });
 
-        // now move to dashboard  
-        $location.url('/dashboard');
       };
 
       $scope.getLoggedUser = function() {
@@ -221,6 +218,11 @@
 
       $scope.getTopicDetails = function() {
         $scope.currentUser = loginFactory.getLoggedUser();  // here we set current user
+        if(!$scope.currentUser) {
+          $location.url('/login');
+          return;
+        }
+
         console.log('getTopicDetails:', $routeParams.id);
         topicFactory.getTopicDetails($routeParams.id, function(data) {
             console.log('topicDetailController: data=', data);
@@ -247,11 +249,11 @@
   </head>
   <body>
     <div id="main" ng-app='myApp'>
-        <a href="#dashboard">Dashboard</a>
+<!--         <a href="#dashboard">Dashboard</a>
         <a href="#customers">Customers</a> 
         <a href="#products">Products</a>
         <a href="#orders">Orders</a>
-        <a href="#login">Login</a><br><hr>
+        <a href="#login">Login</a><br><hr> -->
         <div ng-view=""></div>
     </div>
   </body>

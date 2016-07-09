@@ -6,8 +6,10 @@
 <blockquote>Post your answer here.</blockquote>	
 
 <blockquote>
-	<textarea rows="3" cols="70" ng-model="post"></textarea><br>
-	<button ng-click="addPost(post)">Post</button>
+	<form name="newPostForm" novalidate>
+		<textarea rows="3" cols="70" ng-model="post" required></textarea><br>
+		<button ng-click="addPost(post)" ng-disabled="!newPostForm.$valid">Post</button>
+	</form>
 </blockquote>
 <hr>
 <div ng-repeat='post in topic._post'>
@@ -19,7 +21,9 @@
 		<div ng-repeat='comment in post._comments'>
 			<a ng-href="/#user/{{comment._user._id}}">{{comment._user.name}}</a>:{{comment.comment}}
 		</div>
-		<textarea rows="3" cols="70" ng-model="comment"></textarea><br>
-		<button ng-click="addComment(post, comment)">Comment</button><br>
+		<form name="newCommentForm" novalidate="">
+			<textarea rows="3" cols="70" ng-model="comment" required></textarea><br>
+			<button ng-click="addComment(post, comment)" ng-disabled="!newCommentForm.$valid">Comment</button><br>
+		</form>
 	</blockquote>
 </div>
