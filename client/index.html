@@ -26,9 +26,9 @@
             templateUrl: 'partial/dashboard.html'}) 
         .when('/login', {
             templateUrl: 'partial/login.html'})
-        .when('/user/:userName', {
+        .when('/user/:id', {
             templateUrl: 'partial/userProfile.html', controller: 'userProfileController'})
-        .when('/topic/:topicIndex', {
+        .when('/topic/:id', {
             templateUrl: 'partial/topicDetail.html', controller: 'topicDetailController'})
         .otherwise( {
             templateUrl: 'partial/login.html'}) 
@@ -36,26 +36,29 @@
 
     // loginFactory
     myApp.factory('loginFactory', function($http) {
-        var factory = {loggedUserName: "Anonymous", userlist:[]};
-
-        factory.setLoggedUser = function(name) {
-          factory.loggedUserName = name;
-        }
+        var factory = {};
+        factory.loggedUser = null;
 
         factory.getLoggedUser = function() {
-          return factory.loggedUserName;
+          return factory.loggedUser;
         }
 
         factory.addUser = function(name, callback) {
           // should store at db
-            var p = {name:name};
-            $http.post('/users', p).success(function(output) {
+            $http.post('/users', {name: name}).success(function(output) {
                 callback(output);  //output is the complete user list
+                factory.loggedUser = output;
+                console.log('registered user info = ', output); 
             });
         }
 
-        factory.getUserInfo = function(name, callback) {
-            $http.get('/user/'+ name).success(function(output) {
+        factory.logout = function(user, callback) {
+          factory.loggedUser = null; 
+        };
+
+        factory.getUserInfo = function(id, callback) {
+            console.log('getUserInfo', id);
+            $http.get('/user/'+ id).success(function(output) {
                 console.log('factory.getUserInfo', output);
                 callback(output);
             });
@@ -67,7 +70,7 @@
     myApp.controller('userProfileController', function ($scope, $routeParams, loginFactory)
     {
       $scope.getUserProfile = function() {
-        loginFactory.getUserInfo($routeParams.userName, function(data) {
+        loginFactory.getUserInfo($routeParams.id, function(data) {
             console.log(data);
             $scope.name = data.name;
             $scope.topic = data.numTopic;
@@ -101,15 +104,15 @@
           });          
         };
 
-        factory.getTopicDetails = function(topicIndex, callback) {
-          $http.get('/topic/' + topicIndex).success(function(output) {
+        factory.getTopicDetails = function(id, callback) {
+          $http.get('/topic/' + id).success(function(output) {
               console.log('topicFactory: getTopicDetails = ', output);            
               callback(output);
           });
         }
 
-        factory.addTopic = function(topic, userName, category, description, callback) {
-            var p = {topic:topic, userName:userName, category:category, description:description};
+        factory.addTopic = function(topic, id, category, description, callback) {
+            var p = {topic:topic, id:id, category:category, description:description};
             p.date = (new Date()).getTime();
             $http.post('/topics', p).success(function(output) {
                 callback(output);  //output is the complete user list
@@ -124,15 +127,15 @@
             });
         };
 
-        factory.addPost = function(topicIndex, postContent, currentUser, callback) {
-            var p = {postContent:postContent, currentUser:currentUser};
-            $http.post('/topic/' + topicIndex, p).success(function(output) {
+        factory.addPost = function(topicId, postContent, userId, callback) {
+            var p = {postContent:postContent, id:userId};
+            $http.post('/topic/' + topicId, p).success(function(output) {
                 callback(output);  //output is the complete user list
             });            
         };
 
-        factory.addComment = function(postId, currentUser, comment, callback) {
-            var p = {currentUser:currentUser, comment:comment};
+        factory.addComment = function(topicId, postId, userId, comment, callback) {
+            var p = {topicId:topicId, userId: userId, comment:comment};
             $http.post('/post/' + postId, p).success(function(output) {
                 callback(output);  //output is the complete user list
             });            
@@ -176,9 +179,8 @@
           return;
         }
         loginFactory.addUser($scope.loginName, function(data) {
-          $scope.users = data;
         });
-        loginFactory.setLoggedUser($scope.loginName); 
+
         // now move to dashboard  
         $location.url('/dashboard');
       };
@@ -205,56 +207,37 @@
       };
 
       $scope.addPost = function(postContent) {
-        var currentUser = loginFactory.getLoggedUser();
-        $scope.currentUser = currentUser; // to display current user
-        console.log('topicDeatailController: input parameters:', $scope.currentTopicIndex, postContent, currentUser);
-        topicFactory.addPost($scope.currentTopicIndex, postContent, currentUser, function(data) {
+        console.log('topiccccc', $scope.topic)
+        console.log('topicDeatailController: input parameters:', $scope.topic._id, postContent, $scope.currentUser._id);
+        topicFactory.addPost($scope.topic._id, postContent, $scope.currentUser._id, function(data) {
           // data contains posts
-          $scope.posts = data;
-          console.log('topicDetailController: response of addPost', $scope.posts);
-          topicFactory.getTopicDetails($scope.currentTopicIndex, function(data) {
+          console.log('topicDetailController: response of addPost', data);
+          topicFactory.getTopicDetails($scope.topic._id, function(data) {
               console.log('topicDetailController: data=', data);
-              $scope.topicOwner = data.userName;
-              $scope.topicName = data.topic;
-              $scope.topicDescription = data.description;
-              $scope.posts = data.posts;
-              console.log('topicDetailController addPost: data.posts', data);
+              $scope.topic = data;
           });          
         });
       };
 
       $scope.getTopicDetails = function() {
-        var currentUser = loginFactory.getLoggedUser();
-        $scope.currentUser = currentUser; // to display current user
-        console.log('getTopicDetails:', $routeParams.topicIndex);
-        topicFactory.getTopicDetails($routeParams.topicIndex, function(data) {
+        $scope.currentUser = loginFactory.getLoggedUser();  // here we set current user
+        console.log('getTopicDetails:', $routeParams.id);
+        topicFactory.getTopicDetails($routeParams.id, function(data) {
             console.log('topicDetailController: data=', data);
-            $scope.topicOwner = data.userName;
-            $scope.topicName = data.topic;
-            $scope.topicDescription = data.description;
-            $scope.posts = data.posts;
-            console.log('getTopicDetails: data.description', $scope.topicDescription);
-            $scope.currentTopicIndex = $routeParams.topicIndex;
+            $scope.topic = data;
+            console.log('getTopicDetails: data.description', $scope.topic);
         });
       };
 
       $scope.addComment = function(post, comment) {
-        var currentUser = loginFactory.getLoggedUser();
-        console.log('topicDetailController-addComment-before Factory addPost', $scope.currentTopicIndex, post._id, currentUser, comment);
-        topicFactory.addComment(post._id, currentUser, comment, function(data) {
+        console.log('topicDetailController-addComment-before Factory addPost', $scope.topic._id, post._id, $scope.currentUser._id, comment);
+        topicFactory.addComment($scope.topic._id, post._id, $scope.currentUser._id, comment, function(data) {
             console.log('addComment response from server', data);
-            topicFactory.getTopicDetails($routeParams.topicIndex, function(data) {
+            topicFactory.getTopicDetails($routeParams.id, function(data) {
                 console.log('topicDetailController: data=', data);
-                $scope.topicOwner = data.userName;
-                $scope.topicName = data.topic;
-                $scope.topicDescription = data.description;
-                $scope.posts = data.posts;
-                console.log('getTopicDetails: data.description', $scope.topicDescription);
-                $scope.currentTopicIndex = $routeParams.topicIndex;
+                $scope.topic = data;
             });            
         });
-
-
       };
 
     }); 

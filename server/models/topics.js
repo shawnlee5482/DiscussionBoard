@@ -2,16 +2,17 @@
 // We want to create a file that has the schema for our friends and creates a model that we can then call upon in our controller
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+
 // create our friendSchema
 var TopicsSchema = new mongoose.Schema({
 	category: String,
 	topic: String,
-	userName: String,
+	_user: {type: Schema.Types.ObjectId, ref: 'Users'},
 	description: String,
-	posts: [{type: Schema.Types.ObjectId, ref: 'Post'}],
+	_post: [{type: Schema.Types.ObjectId, ref: 'Posts'}],
 	numPost: {type: Number, default: 0},
 	date: Number
-});
+}, {timestamps: true});
 // use the schema to create the model
 // Note that creating a model CREATES the collection in the database (makes the collection plural)
 mongoose.model('Topics', TopicsSchema);

@@ -6,11 +6,11 @@
     var topics = require('./../controllers/topics.js');
 
     // Topics
-    app.get('/topic/:topicIndex', function(req, res) {
+    app.get('/topic/:id', function(req, res) {
       topics.detailInfo(req, res);
     });
 
-    app.post('/topic/:topicIndex', function(req, res) {
+    app.post('/topic/:id', function(req, res) {
       topics.addPost(req, res);
     });
 
@@ -31,7 +31,7 @@
     }); 
 
     app.post('/topics', function(req, res) { 
-      console.log('app.post', req.body.category, req.body.topic, req.body.userName, req.body.description);    
+      console.log('app.post', req.body.category, req.body.topic, req.body._user, req.body.description);    
       topics.create(req, res);
     }); 
 
@@ -40,12 +40,9 @@
 
     app.post('/users', function(req, res) {
       users.create(req, res);
-      res.send('ok');
     });     
 
-    app.get('/user/:userName', function(req, res) {
+    app.get('/user/:id', function(req, res) {
       users.get(req, res);
     });    
-
-      
 };

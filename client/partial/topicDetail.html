@@ -1,9 +1,8 @@
 <div ng-controller="topicDetailController" ng-init="getTopicDetails()">
-<h2>Logged in as '{{currentUser}}'</h2>
-<label><a ng-href="/#user/{{topicOwner}}">{{topicOwner}}</a></label> <label> posted a topic </label> <br>
-<blockquote ng-bind="topicName">
-	Description: <label ng-bind="topicDescription"></label><br>
-</blockquote>
+<h2>Logged in as '{{currentUser.name}}'</h2>
+<label><a ng-href="/#user/{{topic._user._id}}">{{topic._user.name}}</a></label> <label> posted a topic </label> <br>
+	Topic: <label ng-bind="topic.topic"></label><br>
+	Description: <label ng-bind="topic.description"></label><br>
 <blockquote>Post your answer here.</blockquote>	
 
 <blockquote>
@@ -11,14 +10,14 @@
 	<button ng-click="addPost(post)">Post</button>
 </blockquote>
 <hr>
-<div ng-repeat='post in posts'>
-	<label> <a ng-href="/#user/{{post.user}}">{{post.user}}</a>  </label>:
+<div ng-repeat='post in topic._post'>
+	<label> <a ng-href="/#user/{{post._user}}">{{post._user.name}}</a>  </label>:
 	<label ng-bind='post.postContent'></label>  <a ng-click="up(post)">Up</a>:{{post.upCount}}  
  	<a ng-click="down(post)">Down</a>:{{post.downCount}}
 	<br>
 	<blockquote>
-		<div ng-repeat='comment in post.comments'>
-			<a ng-href="/#user/{{comment.user}}">{{comment.user}}</a>:{{comment.comment}}
+		<div ng-repeat='comment in post._comments'>
+			<a ng-href="/#user/{{comment._user._id}}">{{comment._user.name}}</a>:{{comment.comment}}
 		</div>
 		<textarea rows="3" cols="70" ng-model="comment"></textarea><br>
 		<button ng-click="addComment(post, comment)">Comment</button><br>
