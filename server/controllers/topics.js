@@ -4,7 +4,6 @@ var Topics = mongoose.model('Topics');
 var Post = mongoose.model('Posts');
 var Comment = mongoose.model('Comments');
 
-// Edit the show method as follows
 module.exports = (function() {
 	return {
 		up: function(req, res) {

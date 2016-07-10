@@ -13,7 +13,7 @@
 </blockquote>
 <hr>
 <div ng-repeat='post in topic._post'>
-	<label> <a ng-href="/#user/{{post._user}}">{{post._user.name}}</a>  </label>:
+	<label> <a ng-href="/#user/{{post._user._id}}">{{post._user.name}}</a>  </label>:
 	<label ng-bind='post.postContent'></label>  <a ng-click="up(post)">Up</a>:{{post.upCount}}  
  	<a ng-click="down(post)">Down</a>:{{post.downCount}}
 	<br>

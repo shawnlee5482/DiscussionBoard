@@ -2,8 +2,9 @@
   "name": "OrdersCustomers",
   "version": "0.0.1",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "latest",
     "express": "~4.2.0",
-    "mongoose": "latest",
-    "body-parser": "latest"
+    "mongoose": "latest"
   }
 }
