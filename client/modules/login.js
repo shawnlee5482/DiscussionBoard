@@ -16,7 +16,8 @@ angular.module('login', ['ngRoute', 'ngCookies'])
 
     factory.addUser = function(name, callback) {
       // should store at db
-      $http.post('/users', {name: name}).success(function(output) {
+      console.log('http post requested name=', name);
+      $http.post('/users', {name: name}).success(function(output) {   
           console.log('registered user info = ', output);             
           //factory.loggedUser = output;
           // set it to cookie

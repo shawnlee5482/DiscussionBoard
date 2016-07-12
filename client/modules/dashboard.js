@@ -2,7 +2,6 @@
 //  Dashboard Controller
 angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
 .controller('dashboardController', function($scope, loginFactory, topicFactory, $location) {
-
   $scope.getLoggedUser = function() {
     if(!loginFactory.getLoggedUser()) {
       $location.url('/login');
