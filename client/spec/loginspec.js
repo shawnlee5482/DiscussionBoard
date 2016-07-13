@@ -24,13 +24,14 @@ describe('Login Test', function() {
 		var $httpBackend = _$httpBackend_;		
 		var name = "test";
 
+
 		$httpBackend.when('POST', '/users').respond({name: name});
 
 		loginFactory.addUser(name, function(output) {
 			res = output;
 		});
 		$httpBackend.flush();
-
+		console.log('res = ', res);
 		console.log('res = ', res);
 		expect(res.name).toEqual("test");
 	}));	

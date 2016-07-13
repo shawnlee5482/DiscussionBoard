@@ -1,38 +1,43 @@
-describe('Dashboard Controller Test', function() {
-	var $scope;
-	beforeEach(function() {
-		function() {
-			module('topic');
-			module('dashboard');
+angular.module('mock.topics', []).
+	factory('topicFactory', function() {
+		var factoryService = {};
+	
+		factoryService.getTopics = function() 
+		{
+			return topics;
 		}
+		return factoryService;
+	})
+
+
+describe('Dashboard Controller Test', function() {
+	beforeEach(function() {
+		module('dashboard');
+		module('mock.topics');
 	});
 
-	var $controller;
-	var $rootScope;
+	var $scope;
+	var ctrl;
+	var topicFactory;
 
-	beforeEach(inject(function(_$controller_, _$rootScope_){
+	beforeEach(inject(function($controller, $rootScope, _topicFactory_){
 		// The injector unwraps the underscores (_) from around the parameter names when matching
-		$controller = _$controller_;
-		$rootScope = _$rootScope_;
 		$scope = $rootScope.$new();
+		topicFactory = _topicFactory_;	
+		ctrl = $controller('dashboardController', {$scope: $scope, topicFactory:_topicFactory_});
 	}));
 
 	it('getTopics should return topics', function() {	
-		$controller('dashboardController', {$scope: $scope});
-		var topics = [
+		// spy on the mock service
+		$scope.topics = [
 			{topic: "test1", category:"General", createdAt:"2016-07-10T20:20:17.848Z"},
 			{topic: "test2", category:"General", createdAt:"2016-07-10T20:20:17.848Z"}
 		];		
+        spyOn(topicFactory, 'getTopics').and.returnValue($scope.topics); 
 
 		// just mock service
-		var topicFactory = {
-		  getTopics: function() {}
-		};
-
 		$scope.getTopics();
-
-		// spy on the mock service
-        spyOn(topicFactory, 'getTopics').and.returnValue(topics); 
 		expect($scope.topics.length).not.toBe(0);
 	});	
+
 });
