@@ -7,9 +7,9 @@ angular.module('mock.topics', []).
 		factoryService.getTopics = function() 
 		{
 			return topics;  // whatever
-		}
+		};
 		return factoryService;
-	})
+	});
 
 
 describe('Dashboard Controller Test', function() {
@@ -39,7 +39,7 @@ describe('Dashboard Controller Test', function() {
 			{topic: "test2", category:"General", createdAt:"2016-07-10T20:20:17.848Z"}
 		];		
 		// simulate mock service response
-        spyOn(topicFactory, 'getTopics').and.returnValue($scope.topics); 
+        spyOn(topicFactory, 'getTopics').and.returnValue($scope.topics);
 
 		// call API
 		$scope.getTopics();
