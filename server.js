@@ -67,7 +67,6 @@ apiRoutes.use(function(req, res, next) {
 app.use('/topics', apiRoutes);
 app.use('/topic', apiRoutes);
 app.use('/post', apiRoutes);
-app.use('/users', apiRoutes);
 app.use('/user', apiRoutes);
 
 // this line requires and runs the code from our routes.js file and passes it app so that we can attach our routing rules to our express application!

@@ -10,7 +10,7 @@ describe('Login Test', function() {
 
 		$httpBackend.when('POST', '/users').respond({login: login});
 
-		loginFactory.addUser(login, function(output) {
+		loginFactory.login(login, function(output) {
 			res = output;
 		});
 		$httpBackend.flush();
@@ -27,7 +27,7 @@ describe('Login Test', function() {
 
 		$httpBackend.when('POST', '/users').respond({login: login});
 
-		loginFactory.addUser(login, function(output) {
+		loginFactory.login(login, function(output) {
 			res = output;
 		});
 		$httpBackend.flush();
@@ -45,7 +45,7 @@ describe('Login Test', function() {
 		$httpBackend.when('POST', '/users').respond(500, null);
 
 
-		loginFactory.addUser(login, function(output) {
+		loginFactory.login(login, function(output) {
 			console.log('never comes here');
 			res = output;
 		});

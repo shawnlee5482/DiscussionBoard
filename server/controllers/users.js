@@ -50,10 +50,11 @@ module.exports = (function() {
 			});
 		},
 		create: function(req, res) {
+			console.log('user create req.body.login, req.body.password', req.body.login, req.body.password);
 			Users.findOne({login: req.body.login}, function(err, result) {
 				if(err) {
 					console.log('error in create of user', err);
-					res.json(err);
+					res.json({success:false, message: err});
 				} else {
 					if(!result) {
 						// if login is new create user and return
@@ -62,16 +63,16 @@ module.exports = (function() {
 						f.save(function(err) {
 							if(err) {
 								console.log('Error in saving');
+								res.json({success:false, message: err});
 							} else {
 								console.log('Successfully saved', f); 
-								res.json(f);		
+								res.json({success:true, message: f});
 							}
 						});
 						
 					} else {
 						console.log('user already exist');
-						console.log('user = ', result);
-						res.json(result);
+						res.json({success:false, message: 'user already exist'});
 					}
 				}
 

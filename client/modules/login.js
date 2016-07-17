@@ -16,7 +16,7 @@ angular.module('login', ['ngRoute', 'ngCookies'])
       else return res;
     };
 
-    factory.addUser = function(loginName, password) {
+    factory.login = function(loginName, password) {
         return $q(function(resolve, reject) {
             console.log('http post requested loginName=', loginName, 'password = ', password);
             $http.post('/login', {login: loginName, password:password}).then(function(output) {
@@ -38,7 +38,19 @@ angular.module('login', ['ngRoute', 'ngCookies'])
       // should store at db
     };
 
-    factory.logout = function(user) {
+    factory.signup = function(loginName, password) {
+      return $q(function(resolve, reject) {
+        console.log('http post requested loginName=', loginName, 'password = ', password);
+        $http.post('/users', {login: loginName, password:password}).then(function(output) {
+          resolve(output);
+        }, function(reason) {
+          reject(reason);
+        });
+      });
+      // should store at db
+    };
+
+    factory.logout = function() {
       factory.loggedUser = null;
       $cookieStore.remove('mytoken');
     };
@@ -60,7 +72,7 @@ angular.module('login', ['ngRoute', 'ngCookies'])
 .controller('loginController', function ($scope, loginFactory, $location)
 {
   $scope.login = function() {
-    loginFactory.addUser($scope.loginName, $scope.password).then(function(data) {
+    loginFactory.login($scope.loginName, $scope.password).then(function(data) {
       // now move to dashboard
         console.log('user added = ', data);
 
@@ -75,7 +87,25 @@ angular.module('login', ['ngRoute', 'ngCookies'])
   $scope.getLoggedUser = function() {
     return loginFactory.getLoggedUser();
   };
-});  
+})
+.controller('signupController', function($scope, loginFactory, $location) {
+  $scope.signup = function() {
+    // we have loginName, password1, password2
+
+    loginFactory.signup($scope.loginName, $scope.password1).then(function(result) {
+      if(result.data.success) {
+        $location.url('/login');
+      } else {
+        console.log(result.message)
+      }
+
+    }, function(reason) {
+      // error occured during registration
+      console.log(reason);
+    });
+
+  }
+});
 
 
 
