@@ -16,17 +16,21 @@ angular.module('login', ['ngRoute', 'ngCookies'])
       else return res;
     };
 
-    factory.addUser = function(name) {
+    factory.addUser = function(loginName, password) {
         return $q(function(resolve, reject) {
-            console.log('http post requested name=', name);
-            $http.post('/users', {name: name}).then(function(output) {
-                    console.log('registered user info = ', output.data);
-                    $cookieStore.put('currentUser', output.data);
-                    resolve(output.data);  //output is the complete user list
-                }, function(err) {
-                    reject(err);
-                }
-            );
+            console.log('http post requested loginName=', loginName, 'password = ', password);
+            $http.post('/login', {login: loginName, password:password}).then(function(output) {
+              if(output.data.success) {
+                  console.log('received token = ', output.data.token);
+                  $cookieStore.put('currentUser', output.data.userinfo);
+                  $cookieStore.put('mytoken', output.data.token);
+                  resolve(output.data.userinfo);  //output is the complete user list
+              } else {
+                  reject(output.data);
+              }
+            }, function(err) {
+              reject(err);
+            });
         });
       // should store at db
     };
@@ -52,13 +56,13 @@ angular.module('login', ['ngRoute', 'ngCookies'])
 .controller('loginController', function ($scope, loginFactory, $location)
 {
   $scope.login = function() {
-    loginFactory.addUser($scope.loginName).then(function(data) {
+    loginFactory.addUser($scope.loginName, $scope.password).then(function(data) {
       // now move to dashboard
         console.log('user added = ', data);
       $location.url('/dashboard');          
     }, function(reason) {
       console.log('error in addidng user', reason);
-      $scope.loginName = ""; // reset user name
+      $scope.loginName = ""; // reset loginName
     });
 
   };

@@ -38,11 +38,24 @@
     // First, at the top of your routes.js file you'll have to require the controller
     var users = require('./../controllers/users.js');
 
+    // temporary code
+    app.get('/signup',function(req, res) {
+      users.dummyCreate(req,res);
+    });
+
+    app.post('/login',function(req, res) {
+      try {
+        users.login(req, res, app);
+      } catch (e) {
+        res.json({success: false, message: e});
+      }
+    });
+
     app.post('/users', function(req, res) {
       users.create(req, res);
     });     
 
     app.get('/user/:id', function(req, res) {
       users.get(req, res);
-    });    
+    });
 };

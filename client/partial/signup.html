@@ -1,0 +1,11 @@
+<div ng-controller="signupController">
+    <h3>Please enter your login to join and share your ideas</h3>
+    <form name="signupForm" novalidate>
+        <input type="text" ng-model="login" placeholder="Enter your login here" required>
+        <button ng-click="checkDuplate()">Check Duplicate</button>
+        <input type="password" ng-model="password1" placeholder="Enter your password here" required>
+        <input type="password" ng-model="password2" placeholder="Enter your password again" required>
+        <input ng-disabled="!signupForm.$valid" type="submit" ng-click="signup()">
+    </form>
+    <!--   <label ng-bind='getLoggedUser()'></label> -->
+</div>

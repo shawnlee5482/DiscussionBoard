@@ -6,7 +6,7 @@ angular.module('user', ['ngRoute', 'ngCookies', 'login'])
   $scope.getUserProfile = function() {
     loginFactory.getUserInfo($routeParams.id).then(function(data) {
         console.log(data);
-        $scope.name = data.name;
+        $scope.login = data.login;
         $scope.topic = data.numTopic;
         $scope.post = data.numPost;
         $scope.comment = data.numComment;

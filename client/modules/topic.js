@@ -62,11 +62,11 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login'])
             });
         };
 
-        factory.addUser = function(name) {
+        factory.addUser = function(login) {
             return $q(function(resolve, reject) {
                 // should store at db
                 var p;
-                p = {name: name};
+                p = {login: login};
                 $http.post('/users', p).then(function(output) {
                     resolve(output.data);  //output is the complete user list
                 }, function(reason) {

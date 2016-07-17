@@ -6,11 +6,11 @@ describe('Login Test', function() {
 	it('Should not get null value', inject(function(_loginFactory_, _$httpBackend_) {
 		var loginFactory = _loginFactory_;
 		var $httpBackend = _$httpBackend_;		
-		var name = "test";
+		var login = "test";
 
-		$httpBackend.when('POST', '/users').respond({name: name});
+		$httpBackend.when('POST', '/users').respond({login: login});
 
-		loginFactory.addUser(name, function(output) {
+		loginFactory.addUser(login, function(output) {
 			res = output;
 		});
 		$httpBackend.flush();
@@ -19,33 +19,33 @@ describe('Login Test', function() {
 		expect(res).not.toBeNull();
 	}));
 
-	it('Should return same id for the user with same name', inject(function(_loginFactory_, _$httpBackend_) {
+	it('Should return same id for the user with same login', inject(function(_loginFactory_, _$httpBackend_) {
 		var loginFactory = _loginFactory_;
 		var $httpBackend = _$httpBackend_;		
-		var name = "test";
+		var login = "test";
 
 
-		$httpBackend.when('POST', '/users').respond({name: name});
+		$httpBackend.when('POST', '/users').respond({login: login});
 
-		loginFactory.addUser(name, function(output) {
+		loginFactory.addUser(login, function(output) {
 			res = output;
 		});
 		$httpBackend.flush();
 		console.log('res = ', res);
 		console.log('res = ', res);
-		expect(res.name).toEqual("test");
+		expect(res.login).toEqual("test");
 	}));	
 
 	it('if connection is bad, it should return null', inject(function(_loginFactory_, _$httpBackend_) {
 		var loginFactory = _loginFactory_;
 		var $httpBackend = _$httpBackend_;		
-		var name = "test";
+		var login = "test";
 		var res = null;
 
 		$httpBackend.when('POST', '/users').respond(500, null);
 
 
-		loginFactory.addUser(name, function(output) {
+		loginFactory.addUser(login, function(output) {
 			console.log('never comes here');
 			res = output;
 		});

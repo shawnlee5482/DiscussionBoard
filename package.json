@@ -5,7 +5,9 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "latest",
     "express": "~4.2.0",
+    "jsonwebtoken": "^7.1.6",
     "mongoose": "latest",
+    "morgan": "^1.7.0",
     "promise": "^7.1.1"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@
   <style>
   </style>
   <div>
-    <h3>Welcome {{getLoggedUser().name}}!</h3>
+    <h3>Welcome {{getLoggedUser().login}}!</h3>
     <input type="text" ng-model="keyword" placeholder="Search"> 
   </div>
 
@@ -19,7 +19,7 @@
           <tr ng-repeat='topic in topics | filter: {"topic" : keyword} | orderBy: "-date" '>
               <td ng-bind='topic.category'></td>
               <td><a ng-href="/#topic/{{topic._id}}">{{topic.topic}}</a></td>
-              <td><a ng-href="/#user/{{topic._user._id}}">{{topic._user.name}}</a></td>
+              <td><a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></td>
               <td ng-bind='topic._post.length'></td>
           </tr>
       </tbody>
@@ -35,4 +35,3 @@
     <label ng-show="!newTopicForm.$valid" class="warning">Input all necessary fields</label> 
   </form>
   </div>
-</div>
