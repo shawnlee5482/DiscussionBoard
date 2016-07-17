@@ -24,6 +24,9 @@ angular.module('login', ['ngRoute', 'ngCookies'])
                   console.log('received token = ', output.data.token);
                   $cookieStore.put('currentUser', output.data.userinfo);
                   $cookieStore.put('mytoken', output.data.token);
+                  if (output.data.token) {
+                    $http.defaults.headers.common['x-access-token'] = output.data.token;
+                  }
                   resolve(output.data.userinfo);  //output is the complete user list
               } else {
                   reject(output.data);
@@ -59,6 +62,7 @@ angular.module('login', ['ngRoute', 'ngCookies'])
     loginFactory.addUser($scope.loginName, $scope.password).then(function(data) {
       // now move to dashboard
         console.log('user added = ', data);
+
       $location.url('/dashboard');          
     }, function(reason) {
       console.log('error in addidng user', reason);

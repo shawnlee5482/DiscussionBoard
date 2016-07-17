@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////
 /// topicFactory
 angular.module('topic', ['ngRoute', 'ngCookies', 'login'])
-    .factory('topicFactory', function($http, $q) {
+    .factory('topicFactory', function($http, $q, $cookieStore) {
         var factory = [];
 
         factory.up = function(id) {
@@ -27,6 +27,7 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login'])
         };
 
         factory.getTopics = function() {
+
             return $q(function(resolve, reject) {
                 $http.get('/topics').then(function(output) {
                     console.log('topicFactory', output.data);
@@ -38,6 +39,7 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login'])
         };
 
         factory.getTopicDetails = function(id) {
+            $http.defaults.headers.common['x-access-token'] = $cookieStore.get('mytoken');
             return $q(function(resolve, reject) {
                 $http.get('/topic/' + id).then(function(output) {
                     console.log('topicFactory: getTopicDetails = ', output.data);

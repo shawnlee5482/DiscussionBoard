@@ -20,16 +20,12 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-
-
 app.set('superSecret', secret.secret);
 app.use(morgan('dev'));
 
 // set up a static file server that points to the "client" directory
 app.use(express.static(path.join(__dirname, '/client')));
 
-// this line requires and runs the code from our routes.js file and passes it app so that we can attach our routing rules to our express application!
-require('./server/config/routes.js')(app);
 
 /////////protected route starts from here ///////////////////
 var apiRoutes = express.Router();
@@ -65,8 +61,17 @@ apiRoutes.use(function(req, res, next) {
   }
 });
 
-// apply the routes to our application with the prefix /api
-app.use('/dashboard', apiRoutes);
+
+// thse APIs would be protected by apiRoutes
+// note apiRoutes should come before routes.js
+app.use('/topics', apiRoutes);
+app.use('/topic', apiRoutes);
+app.use('/post', apiRoutes);
+app.use('/users', apiRoutes);
+app.use('/user', apiRoutes);
+
+// this line requires and runs the code from our routes.js file and passes it app so that we can attach our routing rules to our express application!
+require('./server/config/routes.js')(app);
 
 app.listen(8000, function() {
   console.log('listening on: 8000');

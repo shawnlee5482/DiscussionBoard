@@ -1,30 +1,30 @@
 <div ng-controller="topicDetailController" ng-init="getTopicDetails()">
-<h2>Logged in as '{{currentUser.login}}'</h2>
-<label><a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></label> <label> posted a topic </label> <br>
-	Topic: <label ng-bind="topic.topic"></label><br>
-	Description: <label ng-bind="topic.description"></label><br>
-<blockquote>Post your answer here.</blockquote>	
+	<h2>Logged in as '{{currentUser.login}}'</h2>
+	<label><a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></label> <label> posted a topic </label> <br>
+		Topic: <label ng-bind="topic.topic"></label><br>
+		Description: <label ng-bind="topic.description"></label><br>
+	<blockquote>Post your answer here.</blockquote>
 
-<blockquote>
-	<form name="newPostForm" novalidate>
-		<textarea rows="3" cols="70" ng-model="post" required></textarea><br>
-		<button ng-click="addPost(post)" ng-disabled="!newPostForm.$valid">Post</button>
-	</form>
-</blockquote>
-<hr>
-<div ng-repeat='post in topic._post'>
-	<label> <a ng-href="/#user/{{post._user._id}}">{{post._user.login}}</a>  </label>:
-	<label ng-bind='post.postContent'></label>  <a ng-click="up(post)">Up</a>:{{post.upCount}}  
- 	<a ng-click="down(post)">Down</a>:{{post.downCount}}
-	<br>
 	<blockquote>
-		<div ng-repeat='comment in post._comments'>
-			<a ng-href="/#user/{{comment._user._id}}">{{comment._user.login}}</a>:{{comment.comment}}
-		</div>
-		<form name="newCommentForm" novalidate="">
-			<textarea rows="3" cols="70" ng-model="comment" required></textarea><br>
-			<button ng-click="addComment(post, comment)" ng-disabled="!newCommentForm.$valid">Comment</button><br>
+		<form name="newPostForm" novalidate>
+			<textarea rows="3" cols="70" ng-model="post" required></textarea><br>
+			<button ng-click="addPost(post)" ng-disabled="!newPostForm.$valid">Post</button>
 		</form>
 	</blockquote>
-</div>
+	<hr>
+	<div ng-repeat='post in topic._post'>
+		<label> <a ng-href="/#user/{{post._user._id}}">{{post._user.login}}</a>  </label>:
+		<label ng-bind='post.postContent'></label>  <a ng-click="up(post)">Up</a>:{{post.upCount}}
+		<a ng-click="down(post)">Down</a>:{{post.downCount}}
+		<br>
+		<blockquote>
+			<div ng-repeat='comment in post._comments'>
+				<a ng-href="/#user/{{comment._user._id}}">{{comment._user.login}}</a>:{{comment.comment}}
+			</div>
+			<form name="newCommentForm" novalidate="">
+				<textarea rows="3" cols="70" ng-model="comment" required></textarea><br>
+				<button ng-click="addComment(post, comment)" ng-disabled="!newCommentForm.$valid">Comment</button><br>
+			</form>
+		</blockquote>
 	</div>
+</div>
