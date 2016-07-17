@@ -39,7 +39,8 @@ angular.module('login', ['ngRoute', 'ngCookies'])
     };
 
     factory.logout = function(user) {
-      factory.loggedUser = null; 
+      factory.loggedUser = null;
+      $cookieStore.remove('mytoken');
     };
 
     factory.getUserInfo = function(id) {
