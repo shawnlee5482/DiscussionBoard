@@ -1,3 +1,4 @@
+
 <div ng-controller="topicDetailController" ng-init="getTopicDetails()">
 	<h2>Logged in as '{{currentUser.login}}'</h2>
 	<label><a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></label> <label> posted a topic </label> <br>
@@ -8,6 +9,9 @@
 	<blockquote>
 		<form name="newPostForm" novalidate>
 			<textarea rows="3" cols="70" ng-model="post" required></textarea><br>
+			<label>Add image</label>
+			<input filepicker type="filepicker"  on-success="onSuccessImage(event.fpfile)" />
+			<img src="{{imageURL.url}}" style="width:400px"> <br>
 			<button ng-click="addPost(post)" ng-disabled="!newPostForm.$valid">Post</button>
 		</form>
 	</blockquote>

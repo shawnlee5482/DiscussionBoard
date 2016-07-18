@@ -1,6 +1,9 @@
 ///////////////////////////////////////////////////////////
 /// topicFactory
-angular.module('topic', ['ngRoute', 'ngCookies', 'login'])
+angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
+    .config(function (filepickerProvider) {
+      filepickerProvider.setKey('AyVB1bqQpm50F0VaUGUgsz');
+    })
     .factory('topicFactory', function($http, $q, $cookieStore) {
         var factory = [];
 
@@ -172,4 +175,9 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login'])
                 $scope.topic = data;
             });
         };
+
+        $scope.onSuccessImage = function(url) {
+            $scope.imageURL = url;
+            console.log('selected image = ', url);
+        }
     });
