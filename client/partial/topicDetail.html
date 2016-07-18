@@ -20,6 +20,7 @@
 		<label> <a ng-href="/#user/{{post._user._id}}">{{post._user.login}}</a>  </label>:
 		<label ng-bind='post.postContent'></label>  <a ng-click="up(post)">Up</a>:{{post.upCount}}
 		<a ng-click="down(post)">Down</a>:{{post.downCount}}
+		<img src="{{post.imageURL}}" style="width:400px">
 		<br>
 		<blockquote>
 			<div ng-repeat='comment in post._comments'>

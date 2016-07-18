@@ -80,10 +80,10 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
             });
         };
 
-        factory.addPost = function(topicId, postContent, userId) {
+        factory.addPost = function(topicId, postContent, imageURL, userId) {
             return $q(function(resolve, reject) {
                 var p;
-                p = {postContent: postContent, id: userId};
+                p = {postContent: postContent, imageURL: imageURL, id: userId};
                 $http.post('/topic/' + topicId, p).then(function(output) {
                     resolve(output.data);  //output is the complete user list
                 }, function(reason) {
@@ -128,8 +128,8 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
         };
 
         $scope.addPost = function(postContent) {
-            console.log('topicDetailController: input parameters:', $scope.topic._id, postContent, $scope.currentUser._id);
-            topicFactory.addPost($scope.topic._id, postContent, $scope.currentUser._id)
+            console.log('topicDetailController: input parameters:', $scope.topic._id, postContent, $scope.imageURL.url, $scope.currentUser._id);
+            topicFactory.addPost($scope.topic._id, postContent, $scope.imageURL.url, $scope.currentUser._id)
                 .then(function(data) {
                     // data contains posts
                     console.log('topicDetailController: response of addPost', data);

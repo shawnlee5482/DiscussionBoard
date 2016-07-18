@@ -85,8 +85,8 @@ module.exports = (function() {
 				} else {
 					console.log('topic controller:', req.params.id);
 					console.log('topic controller:', topic)
-					console.log('topic controller input parameter:', req.body.postContent, req.body.id);
-					var newPost = new Post({_topic:topic._id, postContent:req.body.postContent, _user:req.body.id,
+					console.log('topic controller input parameter:', req.body.postContent, req.body.imageURL, req.body.id);
+					var newPost = new Post({_topic:topic._id, postContent:req.body.postContent, imageURL: req.body.imageURL, _user:req.body.id,
 						comments:[], upCount: 0, downCount:0});
 
 					newPost.save(function(err) {
