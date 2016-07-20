@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////
 //  Dashboard Controller
 angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
-  .controller('dashboardController', function($scope, loginFactory, topicFactory, $location) {
+  .controller('dashboardController', ['$scope', 'loginFactory', 'topicFactory', '$location', function($scope, loginFactory, topicFactory, $location) {
     $scope.getLoggedUser = function() {
       if(!loginFactory.getLoggedUser()) {
         $location.url('/login');
@@ -9,7 +9,7 @@ angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
     };
 
     $scope.addTopic = function() {
-      topicFactory.addTopic($scope.topicName, loginFactory.getLoggedUser(), $scope.topicCategory, $scope.topicDescription)
+      topicFactory.addTopic($scope.topicName, $scope.imageURL, loginFactory.getLoggedUser(), $scope.topicCategory, $scope.topicDescription)
         .then(function(data) {
           console.log('topic added properly', data);
           return topicFactory.getTopics();
@@ -29,8 +29,13 @@ angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
         });
     };
 
+    $scope.onSuccessImage = function(img) {
+      $scope.imageURL = img.url;
+      console.log('selected image = ', $scope.imageURL);
+    }
+
     $scope.logOut = function() {
       loginFactory.logout();
       $location.url('/login');
     };
-  });
+  }]);

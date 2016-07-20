@@ -1,6 +1,4 @@
 <div ng-controller="dashboardController">
-  <style>
-  </style>
   <div>
     <h3>Welcome {{getLoggedUser().login}}!</h3>
     <input type="text" ng-model="keyword" placeholder="Search"> 
@@ -31,6 +29,8 @@
     Description<br>
     <textarea rows="5" cols="30" ng-model="topicDescription" placeholder="Describe your topic here" required></textarea><br>
     Category<select ng-model="topicCategory" ng-init="topicCategories = ['General', 'Product', 'QnA', 'Discussion', 'Misc']" ng-options="topicCategory for topicCategory in topicCategories" required></select> <br>
+    <input filepicker type="filepicker"  on-success="onSuccessImage(event.fpfile)" />
+    <img class="new-topic-image" ng-src="{{imageURL}}"> <br>
     <input type="submit" ng-disabled="!newTopicForm.$valid" ng-click="addTopic()"> 
     <label ng-show="!newTopicForm.$valid" class="warning">Input all necessary fields</label> 
   </form>

@@ -1,10 +1,10 @@
 ///////////////////////////////////////////////////////////
 /// topicFactory
 angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
-    .config(function (filepickerProvider) {
+    .config(['filepickerProvider', function (filepickerProvider) {
       filepickerProvider.setKey('AyVB1bqQpm50F0VaUGUgsz');
-    })
-    .factory('topicFactory', function($http, $q, $cookieStore) {
+    }])
+    .factory('topicFactory', ['$http', '$q', '$cookieStore', function($http, $q, $cookieStore) {
         var factory = [];
 
         factory.up = function(id) {
@@ -54,10 +54,10 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
 
         };
 
-        factory.addTopic = function(topic, id, category, description) {
+        factory.addTopic = function(topic, imageURL, id, category, description) {
             return $q(function(resolve, reject) {
                 var p;
-                p = {topic: topic, id: id, category: category, description: description};
+                p = {topic: topic, imageURL: imageURL, id: id, category: category, description: description};
                 p.date = (new Date()).getTime();
                 $http.post('/topics', p).then(function(output) {
                     resolve(output.data);  //output is the complete user list
@@ -106,8 +106,8 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
 
         };
         return factory;
-    })
-    .controller('topicDetailController', function ($scope, $routeParams, topicFactory, loginFactory, $location)
+    }])
+    .controller('topicDetailController', ['$scope', '$routeParams', 'topicFactory', 'loginFactory', '$location', function($scope, $routeParams, topicFactory, loginFactory, $location)
     {
         $scope.up = function(post) {
             topicFactory.up(post._id).then(function(data) {
@@ -128,8 +128,8 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
         };
 
         $scope.addPost = function(postContent) {
-            console.log('topicDetailController: input parameters:', $scope.topic._id, postContent, $scope.imageURL.url, $scope.currentUser._id);
-            topicFactory.addPost($scope.topic._id, postContent, $scope.imageURL.url, $scope.currentUser._id)
+            console.log('topicDetailController: input parameters:', $scope.topic._id, postContent, $scope.newPostImageURL, $scope.currentUser._id);
+            topicFactory.addPost($scope.topic._id, postContent, $scope.newPostImageURL, $scope.currentUser._id)
                 .then(function(data) {
                     // data contains posts
                     console.log('topicDetailController: response of addPost', data);
@@ -176,8 +176,12 @@ angular.module('topic', ['ngRoute', 'ngCookies', 'login', 'angular-filepicker'])
             });
         };
 
-        $scope.onSuccessImage = function(url) {
-            $scope.imageURL = url;
-            console.log('selected image = ', url);
+        $scope.onPostSuccessImage = function(image) {
+            $scope.newPostImageURL = image.url;
+            console.log('selected image = ', image.url);
+        };
+
+        $scope.BackToDashboard = function(image) {
+            $location.url('/dashboard');
         }
-    });
+    }]);

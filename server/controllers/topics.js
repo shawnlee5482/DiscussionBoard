@@ -143,7 +143,7 @@ module.exports = (function() {
 
 		},			
 		create: function(req, res) {
-			var f = new Topics({category:req.body.category, topic:req.body.topic, _user:req.body.id, description:req.body.description, numPosts: 0, date:req.body.date});
+			var f = new Topics({category:req.body.category, topic:req.body.topic, imageURL: req.body.imageURL, _user:req.body.id, description:req.body.description, numPosts: 0, date:req.body.date});
 			console.log('f=', f);
 			f.posts = [];
 			f.save(function(err) {

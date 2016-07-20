@@ -3,7 +3,7 @@
 ///////////////////////////////////////////////////////////////////
 // loginFactory
 angular.module('login', ['ngRoute', 'ngCookies'])
-.factory('loginFactory', function($http, $cookies, $cookieStore, $q) {
+.factory('loginFactory', ['$http', '$cookies', '$cookieStore', '$q', function($http, $cookies, $cookieStore, $q) {
     var factory = {};
     factory.loggedUser = null;
 
@@ -68,8 +68,8 @@ angular.module('login', ['ngRoute', 'ngCookies'])
     };
 
     return factory;
-})
-.controller('loginController', function ($scope, loginFactory, $location)
+}])
+.controller('loginController', ['$scope', 'loginFactory', '$location', function ($scope, loginFactory, $location)
 {
   $scope.login = function() {
     loginFactory.login($scope.loginName, $scope.password).then(function(data) {
@@ -87,8 +87,8 @@ angular.module('login', ['ngRoute', 'ngCookies'])
   $scope.getLoggedUser = function() {
     return loginFactory.getLoggedUser();
   };
-})
-.controller('signupController', function($scope, loginFactory, $location) {
+}])
+.controller('signupController', ['$scope', 'loginFactory', '$location', function($scope, loginFactory, $location) {
   $scope.signup = function() {
     // we have loginName, password1, password2
 
@@ -105,7 +105,7 @@ angular.module('login', ['ngRoute', 'ngCookies'])
     });
 
   }
-});
+}]);
 
 
 

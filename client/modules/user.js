@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //// userProfileController
 angular.module('user', ['ngRoute', 'ngCookies', 'login'])
-.controller('userProfileController', function ($scope, $routeParams, loginFactory)
+.controller('userProfileController', ['$scope', '$routeParams' ,'loginFactory', function ($scope, $routeParams, loginFactory)
 {
   $scope.getUserProfile = function() {
     loginFactory.getUserInfo($routeParams.id).then(function(data) {
@@ -14,4 +14,4 @@ angular.module('user', ['ngRoute', 'ngCookies', 'login'])
         console.log('user data fetch error', reason);
     });
   };
-}); 
+}]);

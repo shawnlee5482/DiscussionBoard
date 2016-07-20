@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 var TopicsSchema = new mongoose.Schema({
 	category: String,
 	topic: String,
+	imageURL: String,
 	_user: {type: Schema.Types.ObjectId, ref: 'Users'},
 	description: String,
 	_post: [{type: Schema.Types.ObjectId, ref: 'Posts'}],

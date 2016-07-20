@@ -1,6 +1,12 @@
 {
-  "name": "OrdersCustomers",
+  "name": "DiscussionBoard",
   "version": "0.0.1",
+  "title": "DiscussionBoard",
+  "homepage": "http://shawnlee.us",
+  "author": "SungChan Lee",
+  "license": {
+    "url": "http://shawnlee.us/license.html"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "latest",
@@ -8,7 +14,22 @@
     "jsonwebtoken": "^7.1.6",
     "mongoose": "latest",
     "morgan": "^1.7.0",
-    "promise": "^7.1.1"
+    "promise": "^7.1.1",
+    "bootstrap": "^3.3.6",
+    "browser-sync": "^2.13.0",
+    "font-awesome": "^4.6.3",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.10",
+    "gulp-header": "^1.8.7",
+    "gulp-jshint": "^2.0.1",
+    "gulp-less": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.4",
+    "jquery": "^1.11.3",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "magnific-popup": "^1.1.0",
+    "scrollreveal": "^3.1.4"
   },
   "devDependencies": {
     "jasmine-core": "^2.4.1",
