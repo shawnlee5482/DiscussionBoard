@@ -120,7 +120,7 @@ angular.module('login', ['ngRoute', 'ngCookies'])
   $scope.loginChange = function() {$scope.bChecked = false; console.log('login Name changed')};
   $scope.passwordChange = function() {$scope.bCheckedPassword = false; console.log('passwordchanged')};
 
-
+  // duplication check
   $scope.checkDuplicate = function() {
     console.log('checkDuplicate is called', $scope.loginName);
     $scope.bDuplicatedLogin = true;
