@@ -78,6 +78,24 @@ module.exports = (function() {
 
 			});
 		},
+		check_duplicate: function(req, res) {
+			console.log('user check_duplicate req.body.login', req.body.login);
+			Users.findOne({login: req.body.login}, function(err, result) {
+				if(err) {
+					console.log('error in create of user', err);
+					res.json({success:false, message: err});
+				} else {
+					if(!result) {
+						res.json({success:true});
+						console.log('login name does not exist');
+					} else {
+						console.log('login name already exist');
+						res.json({success:false, message: 'login already exist'});
+					}
+				}
+
+			});
+		},
 		get: function(req, res) {
 			console.log('users controller req.params.id', req.params.id);
 			Users.findOne({_id:req.params.id}, function(err, result) {   // find only one document

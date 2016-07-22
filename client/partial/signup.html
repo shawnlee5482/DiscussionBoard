@@ -1,11 +1,27 @@
-<div ng-controller="signupController">
-    <h3>Please enter your login to join and share your ideas</h3>
-    <form name="signupForm" novalidate>
-        <input type="text" ng-model="loginName" placeholder="Enter your login here" required>
-        <button ng-click="checkDuplate()">Check Duplicate</button>
-        <input type="password" ng-model="password1" placeholder="Enter your password here" required>
-        <input type="password" ng-model="password2" placeholder="Enter your password again" required>
-        <input ng-disabled="!signupForm.$valid" type="submit" ng-click="signup()">
-    </form>
+<div class="setup container" ng-controller="signupController">
+    <div class="login-form">
+        <h2>Please enter your login to join and share your ideas</h2>
+        <form ng-init="bDuplicatedLogin = true" role="form" name="signupForm" novalidate>
+            <div class="form-group">
+                <label class="glyphicon glyphicon-user"> Login</label>
+                <input type="text" class="form-control" ng-change="loginChange()" ng-model="loginName" placeholder="Enter your login here" required>
+                <button ng-click="checkDuplicate()"> Check Duplicate</button>
+                <div ng-show="bDuplicatedLogin && bChecked" class="alert alert-warning">
+                    <strong>Warning!</strong> Login name is in use already. Select another name
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="glyphicon glyphicon-lock"> Password </label>
+                <input type="password" class="form-control"  ng-change="passwordChange()" ng-model="password1" placeholder="Enter your password here" required>
+                <input type="password" class="form-control"  ng-change="passwordChange()" ng-model="password2" placeholder="Enter your password again" required>
+                <input ng-disabled="(bChecked && bDuplicatedLogin)|| !bChecked || !signupForm.$valid || password1 != password2" type="submit" value="Submit" ng-click="signup()">
+                <div ng-show="password1 != password2" class="alert alert-warning">
+                    <strong>Warning!</strong> Password should be matched
+                </div>
+            </div>
+        </form>
+    </div>
     <!--   <label ng-bind='getLoggedUser()'></label> -->
 </div>

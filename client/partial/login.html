@@ -1,14 +1,25 @@
-<div ng-controller="loginController">
-  <h3>Hello!!</h3>
-  <h3>Please enter your login to join and share your ideas</h3>
-  <form name="loginForm" novalidate> 
-	  <input type="text" ng-model="loginName" placeholder="Enter your login here" required>
-      <input type="password" ng-model="password" placeholder="Enter your password here" required>
-	  <input ng-disabled="!loginForm.$valid" type="submit" ng-click="login()">
-  </form>
 
-    <br>
+<div class="login container" ng-controller="loginController">
+    <div class="loginarea container">
+        <h1>Hi! Login to share your ideas</h1>
+        <form class="loginform" role="form" name="loginForm" novalidate>
+            <div class="form-group">
+                <label>Login </label>
+                <input class="form-control" type="text" ng-model="loginName" placeholder="Enter your login here" required>
+            </div>
 
-    If you don't have an account sign up <a href="#/signup">here </a>
-<!--   <label ng-bind='getLoggedUser()'></label> -->
+            <div class="form-group">
+                <label>Password </label>
+                <input class="form-control" type="password" ng-model="password" placeholder="Enter your password here" required>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" ng-disabled="!loginForm.$valid" type="submit" value="Submit" ng-click="login()">
+            </div>
+        </form>
+
+        <h3> If you don't have an account yet, Sign up  <a href="#/signup">here! </a> </h3>
+    </div>
+
+    <!--   <label ng-bind='getLoggedUser()'></label> -->
 </div>

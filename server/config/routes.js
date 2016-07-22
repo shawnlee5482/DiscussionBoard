@@ -51,9 +51,13 @@
       }
     });
 
+    app.post('/users/check_duplicate', function(req, res) {
+      users.check_duplicate(req, res);
+    });
+
     app.post('/users', function(req, res) {
       users.create(req, res);
-    });     
+    });
 
     app.get('/user/:id', function(req, res) {
       users.get(req, res);
