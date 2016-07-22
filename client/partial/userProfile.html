@@ -1,7 +1,21 @@
-<div ng-controller="userProfileController" ng-init="getUserProfile()">
-<h3> User Info </h3>
-	Login: <label ng-bind='login'></label><br>
-	Topic: <label ng-bind='topic'></label><br>
-	Post: <label ng-bind='post'></label><br>
-	Comment: <label ng-bind='comment'></label><br>
+<div class="container-fluid"  ng-controller="userProfileController" ng-init="getUserProfile()">
+	<h3> <span class="glyphicon glyphicon-user"> </span> User Info </h3>
+	<table class="table table-responsive">
+		<thead>
+			<tr>
+				<th>Login</th>
+				<th>Topic</th>
+				<th>Post</th>
+				<th>Comment</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td ng-bind="login"></td>
+				<td ng-bind="topic"></td>
+				<td ng-bind="post"></td>
+				<td ng-bind="comment"></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
