@@ -1,36 +1,49 @@
 
-<div ng-controller="topicDetailController" ng-init="getTopicDetails()">
-	<h2>Logged in as '{{currentUser.login}}'</h2>
-	<label><a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></label> <label> posted a topic </label> <br>
-		Topic: <label ng-bind="topic.topic"></label><br>
-		Description: <label ng-bind="topic.description"></label><br>
+<div id="topicDetail" class="container-fluid" ng-controller="topicDetailController" ng-init="getTopicDetails()">
+	<h2 ng-bind="topic.topic"></h2> by <a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a><hr>
+	<div class="bubble post"> Description: <label ng-bind="topic.description"></label><br>
 		<img ng-src="{{topic.imageURL}}" style="width:400px">
-	<blockquote>Post your answer here.</blockquote>
+	</div>
 
-	<form name="newPostForm" novalidate>
-		<textarea rows="3" cols="70" ng-model="post" required></textarea><br>
-		<label>Add image</label>
-		<input filepicker type="filepicker"  on-success="onPostSuccessImage(event.fpfile)"/>
-		<img ng-src="{{newPostImageURL}}" style="width:400px"> <br>
-		<button ng-click="addPost(post)" ng-disabled="!newPostForm.$valid">Post</button>
-	</form>
+	<hr>
+	<div id="newpost" class="well">
+		<form role="form" name="newPostForm" novalidate>
+			<div class="form-group">
+				<label>Post your answer here.</label> <br>
+				<textarea class="form-control" elastic ng-model="post" required></textarea><br>
+			</div>
+			<div class="form-group">
+				<label>Add image</label>
+				<input filepicker type="filepicker"  on-success="onPostSuccessImage(event.fpfile)"/>
+			</div>
+			<img ng-show="newPostImageURL" ng-src="{{newPostImageURL}}" style="width:400px"> <br>
+			<button ng-click="addPost(post)" ng-disabled="!newPostForm.$valid">Post</button>
+		</form>
+	</div>
 
 	<hr>
 	<div ng-repeat='post in topic._post'>
-		<label> <a ng-href="/#user/{{post._user._id}}">{{post._user.login}}</a>  </label>:
-		<label ng-bind='post.postContent'></label>  <a ng-click="up(post)">Up</a>:{{post.upCount}}
-		<a ng-click="down(post)">Down</a>:{{post.downCount}}
-		<img ng-src="{{post.imageURL}}" style="width:400px">
+		<div class="bubble post">
+			<label> <a ng-href="/#user/{{post._user._id}}">{{post._user.login}}</a>  </label>:
+			<label ng-bind='post.postContent'></label> &nbsp <a ng-click="up(post)"><span class="glyphicon glyphicon-thumbs-up"></span> </a>:{{post.upCount}}
+			&nbsp<a ng-click="down(post)"><span class="glyphicon glyphicon-thumbs-down"></span></a>:{{post.downCount}}
+			<br><img  ng-src="{{post.imageURL}}" style="width:4">
+		</div>
 		<br>
-		<blockquote>
-			<div ng-repeat='comment in post._comments'>
+		<div class="newcomment">
+			<div class = "bubble comment" ng-repeat='comment in post._comments'>
 				<a ng-href="/#user/{{comment._user._id}}">{{comment._user.login}}</a>:{{comment.comment}}
 			</div>
-			<form name="newCommentForm" novalidate="">
-				<textarea rows="3" cols="70" ng-model="comment" required></textarea><br>
-				<button ng-click="addComment(post, comment)" ng-disabled="!newCommentForm.$valid">Comment</button><br>
-			</form>
-		</blockquote>
+
+			<div class="commentform">
+				<form role="form" name="newCommentForm" novalidate="">
+					<div class="form-group">
+						<textarea rows="3" cols="70" ng-model="comment" required></textarea><br>
+					</div>
+					<button ng-click="addComment(post, comment)" ng-disabled="!newCommentForm.$valid">Comment</button><br>
+				</form>
+			</div>
+		</div>
 	</div>
 
 	<button ng-click="BackToDashboard()">Back to Dashboard</button>

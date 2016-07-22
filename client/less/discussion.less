@@ -66,3 +66,99 @@ h6 {
   background-image: url('../images/sky.jpeg');
   background-repeat: no-repeat;
 }
+
+#search_box {
+  margin: 20px auto 20px 20px;
+
+}
+
+.dashboard {
+  background-color: lightskyblue;
+  button {
+    display: block;
+    margin-right: 40px;
+    margin-top: 40px;
+  }
+
+}
+
+.newtopic {
+  * {
+    margin: 5px;
+  }
+  img {
+    width: 400px;
+  }
+}
+
+.bubble{
+  border-radius: 5px;
+  box-shadow: 0 0 6px #B2B2B2;
+  display: inline-block;
+  padding: 10px 18px;
+  position: relative;
+  vertical-align: top;
+  clear: both;
+}
+
+.bubble::before {
+  content: "\00a0";
+  display: block;
+  height: 16px;
+  position: absolute;
+  top: 11px;
+  transform:             rotate( 29deg ) skew( -35deg );
+  -moz-transform:    rotate( 29deg ) skew( -35deg );
+  -ms-transform:     rotate( 29deg ) skew( -35deg );
+  -o-transform:      rotate( 29deg ) skew( -35deg );
+  -webkit-transform: rotate( 29deg ) skew( -35deg );
+  width:  20px;
+}
+
+.post {
+  float: left;
+  margin: 15px 45px 15px 20px;
+  background-color: #AAAAEE;
+}
+
+.post::before {
+  box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+  left: -9px;
+  background-color: #AAAAEE;
+}
+
+.comment {
+  float: left;
+  margin: 5px 20px 5px 85px;
+  background-color: #DDA0DD;
+}
+
+.comment::before {
+  box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+  left: -9px;
+  background-color: #DDA0DD;
+}
+
+#newpost {
+  width: 100%;
+  display: inline-block;
+}
+
+.newcomment {
+  width: 100%;
+  margin-left: 100px;
+  display: inline-block;
+}
+
+.commentform {
+  width: 100%;
+  margin-left: 85px;
+  margin-top: 30px;
+  display: inline-block;
+}
+
+#topicDetail {
+  img {
+    width: 400px;
+  }
+}

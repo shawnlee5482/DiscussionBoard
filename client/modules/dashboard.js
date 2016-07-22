@@ -1,6 +1,23 @@
 ///////////////////////////////////////////////////////////////////////
 //  Dashboard Controller
 angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
+  .directive('elastic', [
+    '$timeout',
+    function($timeout) {
+      return {
+        restrict: 'A',
+        link: function($scope, element) {
+          $scope.initialHeight = $scope.initialHeight || element[0].style.height;
+          var resize = function() {
+            element[0].style.height = $scope.initialHeight;
+            element[0].style.height = "" + element[0].scrollHeight + "px";
+          };
+          element.on("input change", resize);
+          $timeout(resize, 0);
+        }
+      };
+    }
+  ])
   .controller('dashboardController', ['$scope', 'loginFactory', 'topicFactory', '$location', function($scope, loginFactory, topicFactory, $location) {
     $scope.getLoggedUser = function() {
       if(!loginFactory.getLoggedUser()) {
@@ -12,6 +29,11 @@ angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
       topicFactory.addTopic($scope.topicName, $scope.imageURL, loginFactory.getLoggedUser(), $scope.topicCategory, $scope.topicDescription)
         .then(function(data) {
           console.log('topic added properly', data);
+          $scope.topicName = "";
+          $scope.imageURL = "";
+          $scope.topicCategory = "";
+          $scope.topicDescription = "";
+
           return topicFactory.getTopics();
         })
         .then(function(d) {
@@ -21,6 +43,7 @@ angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
     };
 
     $scope.getTopics = function() {
+      console.log("getTopics is called");
       // to fill select option menu for customers
       topicFactory.getTopics()
         .then(function(data) {
