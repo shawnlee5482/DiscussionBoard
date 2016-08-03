@@ -5,8 +5,9 @@
 		<img class="img-responsive" ng-src="{{topic.imageURL}}" style="width:400px">
 	</div>
 
-	<hr>
-	<div id="newpost" class="well">
+	<br>
+
+	<div id="newpost">
 		<form role="form" name="newPostForm" novalidate>
 			<div class="form-group">
 				<label>Post your answer here.</label> <br>
@@ -46,5 +47,7 @@
 		</div>
 	</div>
 
-	<button class="btn btn-primary" ng-click="BackToDashboard()">Back to Dashboard</button>
+	<ul class="pager">
+		<li class="previous" ng-click="BackToDashboard()"><a>Back to Dashboard</a></li>
+	</ul>
 </div>

@@ -28,7 +28,7 @@
                     <td class="visible-md visible-lg" ng-bind='topic.category'></td>
                     <td><a ng-href="/#topic/{{topic._id}}">{{topic.topic}}</a></td>
                     <td><a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></td>
-                    <td class="visible-md visible-lg" ng-bind='topic._post.length'></td>
+                    <td class="visible-md visible-lg"><span class="badge" ng-bind='topic._post.length'></span></td>
                 </tr>
                 </tbody>
             </table>
