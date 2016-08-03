@@ -18,15 +18,15 @@ And another people can create a comment.
 
 #Used Technology
 
-MongoDB
-Express
-AngularJS
-Node.JS
-Bootstrap
-Filepicker libary
-JWT Auth
-Grunt
-Less
+MongoDB,
+Express,
+AngularJS,
+Node.JS,
+Bootstrap,
+Filepicker libary,
+JWT Auth,
+Grunt,
+Less,
 Karma/Jasmine
 
 <hr>
