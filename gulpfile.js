@@ -62,11 +62,46 @@ gulp.task('minify-js', function() {
         }))
 });
 
+
+// Copy Bootstrap core files from node_modules to vendor directory
+gulp.task('jquery', function() {
+  return gulp.src(['node_modules/jquery/dist/*.js'])
+    .pipe(gulp.dest('client/lib/jquery'))
+});
+
+gulp.task('angular', function() {
+  return gulp.src(['node_modules/angular/*.js'])
+    .pipe(gulp.dest('client/lib/angular'))
+});
+
+gulp.task('angular-route', function() {
+  return gulp.src(['node_modules/angular-route/*.js'])
+    .pipe(gulp.dest('client/lib/angular-route'))
+});
+
+gulp.task('angular-cookies', function() {
+  return gulp.src(['node_modules/angular-cookies/*.js'])
+    .pipe(gulp.dest('client/lib/angular-cookies'))
+});
+
 // Copy Bootstrap core files from node_modules to vendor directory
 gulp.task('bootstrap', function() {
     return gulp.src(['node_modules/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
         .pipe(gulp.dest('client/lib/bootstrap'))
 });
+
+// Copy Bootstrap core files from node_modules to vendor directory
+gulp.task('filepicker', function() {
+  return gulp.src(['node_modules/filepicker-js/dist/*.js'])
+    .pipe(gulp.dest('client/lib/filepicker-js'))
+});
+
+// Copy Bootstrap core files from node_modules to vendor directory
+gulp.task('angular-filepicker', function() {
+  return gulp.src(['bower_components/angular-filepicker/dist/*.js'])
+    .pipe(gulp.dest('client/lib/angular-filepicker'))
+});
+
 
 // Copy Magnific Popup core files from node_modules to vendor directory
 gulp.task('magnific-popup', function() {
@@ -94,7 +129,8 @@ gulp.task('fontawesome', function() {
 });
 
 // Copy all dependencies from node_modules
-gulp.task('copy', ['bootstrap', 'fontawesome', 'magnific-popup', 'scrollreveal']);
+gulp.task('copy', ['jquery', 'angular', 'angular-filepicker', 'angular-cookies', 'angular-route',
+  'bootstrap', 'fontawesome', 'magnific-popup', 'scrollreveal']);
 
 // Configure the browserSync task
 gulp.task('browserSync', function() {
