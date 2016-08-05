@@ -129,7 +129,7 @@ gulp.task('fontawesome', function() {
 });
 
 // Copy all dependencies from node_modules
-gulp.task('copy', ['jquery', 'angular', 'angular-filepicker', 'angular-cookies', 'angular-route',
+gulp.task('copy', ['jquery', 'filepicker', 'angular', 'angular-filepicker', 'angular-cookies', 'angular-route',
   'bootstrap', 'fontawesome', 'magnific-popup', 'scrollreveal']);
 
 // Configure the browserSync task
