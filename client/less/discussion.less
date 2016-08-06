@@ -8,10 +8,12 @@ main
 {
   height: 100%;
   width: 100%;
+  font-size: @main-font-size;
 }
 
 body {
   .serif-font;
+
 }
 
 h1,
@@ -104,38 +106,40 @@ h6 {
 
 .topic {
   float: left;
-  margin: 15px 20px 15px 20px;
-  background-color: #cccccc;
+  font-size: @main-font-size;
+  margin: @bubble-top-bottom-margin 0 @bubble-top-bottom-margin  0 * @bubble-indent;
+  background-color: @topic-background-color;
 }
 
 .topic::before {
   box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
   left: -9px;
-  background-color: #cccccc;
+  background-color: @topic-background-color;
 }
 
 .post {
   float: left;
-  margin: 15px 20px 15px 100px;
-  background-color: #dce8ee;
+  font-size: @main-font-size;
+  margin: @bubble-top-bottom-margin 0 @bubble-top-bottom-margin  3 * @bubble-indent;
+  background-color: @post-background-color;
 }
 
 .post::before {
   box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
   left: -9px;
-  background-color: #dce8ee;
+  background-color: @post-background-color;
 }
 
 .comment {
   float: left;
-  margin:15px 20px 15px 170px;
-  background-color: #ddc9bf;
+  margin: @bubble-top-bottom-margin 0 @bubble-top-bottom-margin  5 * @bubble-indent;
+  background-color: @comment-background-color;
 }
 
 .comment::before {
   box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
   left: -9px;
-  background-color: #ddc9bf;
+  background-color: @comment-background-color;
 }
 
 #newpost {
