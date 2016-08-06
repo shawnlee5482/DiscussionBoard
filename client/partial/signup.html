@@ -1,21 +1,23 @@
 <div class="signup container" ng-controller="signupController">
     <div class="signup-form">
-        <form ng-init="bDuplicatedLogin = true" role="form" name="signupForm" novalidate>
+        <form role="form" name="signupForm" novalidate>
             <div class="form-group">
                 <label class="glyphicon glyphicon-user"> Login</label>
                 <input type="text" class="form-control" ng-change="loginChange()" ng-model="loginName" placeholder="Enter your login here" required>
                 <button ng-click="checkDuplicate()"> Check Duplicate</button>
-                <div ng-show="bDuplicatedLogin && bChecked" class="alert alert-warning">
+                <div ng-show="bDuplicatedLogin && bDuplicateChecked" class="alert alert-warning">
                     <strong>Warning!</strong> Login name is in use already. Select another name
                 </div>
-
+                <div ng-show="!bDuplicatedLogin && bDuplicateChecked" class="alert alert-info">
+                    You may use that name
+                </div>
             </div>
 
             <div class="form-group">
                 <label class="glyphicon glyphicon-lock"> Password </label>
                 <input type="password" class="form-control"  ng-change="passwordChange()" ng-model="password1" placeholder="Enter your password here" required>
                 <input type="password" class="form-control"  ng-change="passwordChange()" ng-model="password2" placeholder="Enter your password again" required>
-                <input ng-disabled="(bChecked && bDuplicatedLogin)|| !bChecked || !signupForm.$valid || password1 != password2" type="submit" value="Submit" ng-click="signup()">
+                <input ng-disabled="bDuplicatedLogin || !signupForm.$valid || password1 != password2" type="submit" value="Submit" ng-click="signup()">
                 <div ng-show="password1 != password2" class="alert alert-warning">
                     <strong>Warning!</strong> Password should be matched
                 </div>

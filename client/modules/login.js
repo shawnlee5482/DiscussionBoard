@@ -117,15 +117,16 @@ angular.module('login', ['ngRoute', 'ngCookies'])
     });
   };
 
-  $scope.loginChange = function() {$scope.bChecked = false; console.log('login Name changed')};
+  $scope.loginChange = function() {$scope.bDuplicateChecked = false; console.log('login Name changed')};
   $scope.passwordChange = function() {$scope.bCheckedPassword = false; console.log('passwordchanged')};
+  $scope.bDuplicatedLogin = false;
+  $scope.bDuplicateChecked = false;
 
   // duplication check
   $scope.checkDuplicate = function() {
     console.log('checkDuplicate is called', $scope.loginName);
-    $scope.bDuplicatedLogin = true;
-    $scope.bChecked = true;
     loginFactory.checkDuplicate($scope.loginName).then(function(result) {
+      $scope.bDuplicateChecked = true;
       if(result.data.success) {
         console.log('login name is available');
         $scope.bDuplicatedLogin = false;
@@ -133,11 +134,11 @@ angular.module('login', ['ngRoute', 'ngCookies'])
         console.log('Login name is in use. Select another name!');
         $scope.bDuplicatedLogin = true;
       }
+      return $scope.bDuplicatedLogin;
     }, function(reason) {
       console.log(reason);
       return false;
     });
-    return $scope.bDuplicatedLogin;
   };
 }]);
 
