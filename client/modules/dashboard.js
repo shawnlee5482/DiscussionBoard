@@ -1,3 +1,5 @@
+'use strict';
+
 ///////////////////////////////////////////////////////////////////////
 //  Dashboard Controller
 angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])

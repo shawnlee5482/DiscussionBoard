@@ -1,68 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title></title>
+  <title></title>
 
-    <!-- THESE TWO VERSIONS BELOW MUST MATCH!!!! -->
+  <!-- THESE TWO VERSIONS BELOW MUST MATCH!!!! -->
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="lib/jquery/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="lib/jquery/jquery.min.js"></script>
 
-    <!--fake favicon-->
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-    <!-- Bootstrap Core CSS -->
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <!--fake favicon-->
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <!-- Bootstrap Core CSS -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="lib/angular/angular.min.js"></script>
-    <script src="lib/angular-route/angular-route.min.js"></script>
-    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
-    <script type="text/javascript" src="modules/min/login.min.js"></script>
-    <script type="text/javascript" src="modules/min/dashboard.min.js"></script>
-    <script type="text/javascript" src="modules/min/topic.min.js"></script>
-    <script type="text/javascript" src="modules/min/user.min.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-route/angular-route.min.js"></script>
+  <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="modules/min/login.min.js"></script>
+  <script type="text/javascript" src="modules/min/dashboard.min.js"></script>
+  <script type="text/javascript" src="modules/min/topic.min.js"></script>
+  <script type="text/javascript" src="modules/min/user.min.js"></script>
 
-    <script type="text/javascript" src="lib/filepicker-js/filepicker.js"></script>
-    <script type="text/javascript" src="lib/angular-filepicker/angular_filepicker.js"></script>
-    <!-- Theme CSS -->
-    <link href="css/discussion.min.css" rel="stylesheet">
+  <script type="text/javascript" src="lib/filepicker-js/filepicker.js"></script>
+  <script type="text/javascript" src="lib/angular-filepicker/angular_filepicker.js"></script>
+  <!-- Theme CSS -->
+  <link href="css/discussion.min.css" rel="stylesheet">
 
-    <script>
-        // TODO: You'd have routes in their own file, external to the HTML
-        //  inject the ngRoute dependency in the module.
-        var myApp = angular.module('myApp', ['ngRoute', 'ngCookies', 'login', 'dashboard', 'topic', 'user']);
+  <script>
+    // TODO: You'd have routes in their own file, external to the HTML
+    //  inject the ngRoute dependency in the module.
+    var myApp = angular.module('myApp', ['ngRoute', 'ngCookies', 'login', 'dashboard', 'topic', 'user']);
 
 
-        // setup route
-        myApp.config(function($routeProvider) {
-            $routeProvider
-                .when('/customers', {
-                    templateUrl: 'partial/customers.html'})
-                .when('/products', {
-                    templateUrl: 'partial/products.html'})
-                .when('/orders', {
-                    templateUrl: 'partial/orders.html'})
-                .when('/dashboard', {
-                    templateUrl: 'partial/dashboard.html'})
-                .when('/login', {
-                    templateUrl: 'partial/login.html'})
-                .when('/signup', {
-                    templateUrl: 'partial/signup.html'})
-                .when('/user/:id', {
-                    templateUrl: 'partial/userProfile.html', controller: 'userProfileController'})
-                .when('/topic/:id', {
-                    templateUrl: 'partial/topicDetail.html', controller: 'topicDetailController'})
-                .otherwise( {
-                    templateUrl: 'partial/login.html'})
-        });
-
-    </script>
+    // setup route
+    myApp.config(function($routeProvider) {
+      $routeProvider
+        .when('/customers', {
+          templateUrl: 'partial/customers.html'
+        })
+        .when('/products', {
+          templateUrl: 'partial/products.html'
+        })
+        .when('/orders', {
+          templateUrl: 'partial/orders.html'
+        })
+        .when('/dashboard', {
+          templateUrl: 'partial/dashboard.html'
+        })
+        .when('/login', {
+          templateUrl: 'partial/login.html'
+        })
+        .when('/signup', {
+          templateUrl: 'partial/signup.html'
+        })
+        .when('/user/:id', {
+          templateUrl: 'partial/userProfile.html',
+          controller: 'userProfileController'
+        })
+        .when('/topic/:id', {
+          templateUrl: 'partial/topicDetail.html',
+          controller: 'topicDetailController'
+        })
+        .otherwise({
+          templateUrl: 'partial/login.html'
+        })
+    });
+  </script>
 
 </head>
+
 <body>
-<div class="main" data-ng-app='myApp'>
+  <div class="main" data-ng-app='myApp'>
     <div data-ng-view=""></div>
-</div>
+  </div>
 </body>
+
 </html>

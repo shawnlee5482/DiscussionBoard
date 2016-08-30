@@ -1,67 +1,67 @@
 <div class="container-fluid" ng-controller="dashboardController">
 
-    <div class="dashboard row">
-        <div class="col-md-11 col-sm-11 text-center">
-            <h1>Welcome {{getLoggedUser().login}}!</h1>
-        </div>
-        <div class="col-md-1 col-sm-1">
-            <button class="btn btn-primary" data-ng-click="logOut()">LogOut</button>
-        </div>
+  <div class="dashboard row">
+    <div class="col-md-11 col-sm-11 text-center">
+      <h1>Welcome {{getLoggedUser().login}}!</h1>
     </div>
-
-    <div id="search_box">
-        <span class="glyphicon glyphicon-search">&nbsp</span><input type="text" data-ng-model="keyword" placeholder="Search">
+    <div class="col-md-1 col-sm-1">
+      <button class="btn btn-primary" data-ng-click="logOut()">LogOut</button>
     </div>
-    <div class="topiclist row">
-        <div class="col-md-9 col-sm-12">
-            <table class="table table-hover table-responsive" data-ng-init="getTopics()">
-                <thead>
-                <tr>
-                    <th class="visible-md visible-lg">Category</th>
-                    <th>Topic</th>
-                    <th>User Name</th>
-                    <th class="visible.md visible-lg">Posts</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat='topic in topics | filter: {"topic" : keyword} | orderBy: "-date" '>
-                    <td class="visible-md visible-lg" data-ng-bind='topic.category'></td>
-                    <td><a data-ng-href="/#topic/{{topic._id}}">{{topic.topic}}</a></td>
-                    <td><a data-ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></td>
-                    <td class="visible-md visible-lg"><span class="badge" data-ng-bind='topic._post.length'></span></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-3 col-sm-12 newtopic">
-            <h3>Add a New Topic</h3>
+  </div>
 
-            <form name="newTopicForm" novalidate>
-                <div class="form-group">
-                    <label>Topic</label>
-                    <input class="form-control" type="text" data-ng-model="topicName" placeholder="Name the topic" required><br>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea elastic class="form-control" data-ng-model="topicDescription" placeholder="Describe your topic here" required></textarea><br>
-                </div>
-
-                <div class="form-group">
-                    <label>Category</label>
-                    <select data-ng-model="topicCategory" data-ng-init="topicCategories = ['General', 'Product', 'QnA', 'Discussion', 'Misc']" data-ng-options="topicCategory for topicCategory in topicCategories" required></select> <br>
-                </div>
-
-                <div class="form-group">
-                    <label>Add Image</label>
-                    <input filepicker type="filepicker" on-success="onSuccessImage(event.fpfile)" />
-                </div>
-                <img data-ng-show="imageURL" class="new-topic-image" data-ng-src="{{imageURL}}"> <br>
-                <input type="submit" value="Submit" data-ng-disabled="!newTopicForm.$valid" ng-click="addTopic()">
-                <label data-ng-show="!newTopicForm.$valid" class="warning">Input all necessary fields</label>
-            </form>
-        </div>
+  <div id="search_box">
+    <span class="glyphicon glyphicon-search">&nbsp</span><input type="text" data-ng-model="keyword" placeholder="Search">
+  </div>
+  <div class="topiclist row">
+    <div class="col-md-9 col-sm-12">
+      <table class="table table-hover table-responsive" data-ng-init="getTopics()">
+        <thead>
+          <tr>
+            <th class="visible-md visible-lg">Category</th>
+            <th>Topic</th>
+            <th>User Name</th>
+            <th class="visible.md visible-lg">Posts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat='topic in topics | filter: {"topic" : keyword} | orderBy: "-date" '>
+            <td class="visible-md visible-lg" data-ng-bind='topic.category'></td>
+            <td><a data-ng-href="/#topic/{{topic._id}}">{{topic.topic}}</a></td>
+            <td><a data-ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a></td>
+            <td class="visible-md visible-lg"><span class="badge" data-ng-bind='topic._post.length'></span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <br>
-    <br>
+    <div class="col-md-3 col-sm-12 newtopic">
+      <h3>Add a New Topic</h3>
+
+      <form name="newTopicForm" novalidate>
+        <div class="form-group">
+          <label>Topic</label>
+          <input class="form-control" type="text" data-ng-model="topicName" placeholder="Name the topic" required><br>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea elastic class="form-control" data-ng-model="topicDescription" placeholder="Describe your topic here" required></textarea><br>
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <select data-ng-model="topicCategory" data-ng-init="topicCategories = ['General', 'Product', 'QnA', 'Discussion', 'Misc']" data-ng-options="topicCategory for topicCategory in topicCategories" required></select> <br>
+        </div>
+
+        <div class="form-group">
+          <label>Add Image</label>
+          <input filepicker type="filepicker" on-success="onSuccessImage(event.fpfile)" />
+        </div>
+        <img data-ng-show="imageURL" class="new-topic-image" data-ng-src="{{imageURL}}"> <br>
+        <input type="submit" value="Submit" data-ng-disabled="!newTopicForm.$valid" ng-click="addTopic()">
+        <label data-ng-show="!newTopicForm.$valid" class="warning">Input all necessary fields</label>
+      </form>
+    </div>
+  </div>
+  <br>
+  <br>
 
 </div>

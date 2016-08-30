@@ -1,34 +1,33 @@
-
 <div id="login" class="container-fluid" data-ng-controller="loginController">
-    <div class="row text-center">
-        <h1>Discussion Board</h1>
+  <div class="row text-center">
+    <h1>Discussion Board</h1>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-8 col-sm-12 visible-md-block visible-lg-block">
+      <img src="images/discussion.jpg">
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-8 col-sm-12 visible-md-block visible-lg-block">
-            <img src="images/discussion.jpg">
+    <div class="col-md-4 col-sm-12">
+      <form class="loginform" role="form" name="loginForm" novalidate>
+        <div class="form-group">
+          <label>Login </label>
+          <input class="form-control" type="text" data-ng-model="loginName" placeholder="Enter your login here" required>
         </div>
-        <div class="col-md-4 col-sm-12">
-            <form class="loginform" role="form" name="loginForm" novalidate>
-                <div class="form-group">
-                    <label>Login </label>
-                    <input class="form-control" type="text" data-ng-model="loginName" placeholder="Enter your login here" required>
-                </div>
 
-                <div class="form-group">
-                    <label>Password </label>
-                    <input class="form-control" type="password" data-ng-model="password" placeholder="Enter your password here" required>
-                </div>
-
-                <div class="form-group">
-                    <input class="form-control" data-ng-disabled="!loginForm.$valid" type="submit" value="Submit" data-ng-click="login()">
-                </div>
-            </form>
-
-            <h5> If you don't have an account yet, Sign up  <a href="#/signup">here! </a> </h5>
+        <div class="form-group">
+          <label>Password </label>
+          <input class="form-control" type="password" data-ng-model="password" placeholder="Enter your password here" required>
         </div>
+
+        <div class="form-group">
+          <input class="form-control" data-ng-disabled="!loginForm.$valid" type="submit" value="Submit" data-ng-click="login()">
+        </div>
+      </form>
+
+      <h5> If you don't have an account yet, Sign up  <a href="#/signup">here! </a> </h5>
     </div>
+  </div>
 
 
-    <!--   <label ng-bind='getLoggedUser()'></label> -->
+  <!--   <label ng-bind='getLoggedUser()'></label> -->
 </div>

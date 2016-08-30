@@ -3,34 +3,34 @@
 var topics = require('./../controllers/topics.js');
 var users = require('./../controllers/users.js');
 
-  // This is our routes.js file located in server/config/routes.js
-  // This is where we will define all of our routing rules!
-  // We will have to require this in the server.js file (and pass it app!)
-  module.exports = function(app) {
- 
-    // Topics
-    app.get('/topic/:id', topics.detailInfo);
+// This is our routes.js file located in server/config/routes.js
+// This is where we will define all of our routing rules!
+// We will have to require this in the server.js file (and pass it app!)
+module.exports = function(app) {
 
-    app.post('/topic/:id', topics.addPost);
+  // Topics
+  app.get('/topic/:id', topics.detailInfo);
 
-    app.get('/post/:id/up', topics.up);
+  app.post('/topic/:id', topics.addPost);
 
-    app.get('/post/:id/down', topics.down);
+  app.get('/post/:id/up', topics.up);
 
-    app.post('/post/:id', topics.addComment);
+  app.get('/post/:id/down', topics.down);
 
-    app.get('/topics', topics.index);
+  app.post('/post/:id', topics.addComment);
 
-    app.post('/topics', topics.create);
+  app.get('/topics', topics.index);
 
-    // TODO: User routes should be in their own file
-    app.get('/signup', users.dummyCreate);
+  app.post('/topics', topics.create);
 
-    app.post('/login', users.login);
+  // TODO: User routes should be in their own file
+  app.get('/signup', users.dummyCreate);
 
-    app.post('/users/check_duplicate', users.check_duplicate);
+  app.post('/login', users.login);
 
-    app.post('/users', users.create);
+  app.post('/users/check_duplicate', users.check_duplicate);
 
-    app.get('/user/:id', users.get);
+  app.post('/users', users.create);
+
+  app.get('/user/:id', users.get);
 };

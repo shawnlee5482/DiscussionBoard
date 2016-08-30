@@ -12,7 +12,9 @@ var UsersSchema = new mongoose.Schema({
   numTopic: Number,
   numPost: Number,
   numComment: Number
-}, {timestamps: true});
+}, {
+  timestamps: true
+});
 // use the schema to create the model
 // Note that creating a model CREATES the collection in the database (makes the collection plural)
 mongoose.model('Users', UsersSchema);

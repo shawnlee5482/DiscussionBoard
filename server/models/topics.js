@@ -7,15 +7,26 @@ var Schema = mongoose.Schema;
 
 // create our friendSchema
 var TopicsSchema = new mongoose.Schema({
-	category: String,
-	topic: String,
-	imageURL: String,
-	_user: {type: Schema.Types.ObjectId, ref: 'Users'},
-	description: String,
-	_post: [{type: Schema.Types.ObjectId, ref: 'Posts'}],
-	numPost: {type: Number, default: 0},
-	date: Number
-}, {timestamps: true});
+  category: String,
+  topic: String,
+  imageURL: String,
+  _user: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users'
+  },
+  description: String,
+  _post: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Posts'
+  }],
+  numPost: {
+    type: Number,
+    default: 0
+  },
+  date: Number
+}, {
+  timestamps: true
+});
 // use the schema to create the model
 // Note that creating a model CREATES the collection in the database (makes the collection plural)
 mongoose.model('Topics', TopicsSchema);

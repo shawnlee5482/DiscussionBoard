@@ -17,25 +17,23 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'client/lib/jquery-1.12.0.js',
-        'client/lib/angular-1.3.5/angular.min.js',
-        'client/lib/angular-1.3.5/angular-route.min.js',
-        'client/lib/angular-1.3.5/angular-cookies.min.js',    
-        'client/lib/angular-1.3.5/angular-mocks.js',    
-        'client/modules/*.js',
-        'client/spec/*.js' 
+      'client/lib/jquery-1.12.0.js',
+      'client/lib/angular-1.3.5/angular.min.js',
+      'client/lib/angular-1.3.5/angular-route.min.js',
+      'client/lib/angular-1.3.5/angular-cookies.min.js',
+      'client/lib/angular-1.3.5/angular-mocks.js',
+      'client/modules/*.js',
+      'client/spec/*.js'
     ],
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-    },
+    preprocessors: {},
 
 
     // test results reporter to use
