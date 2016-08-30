@@ -1,3 +1,5 @@
+'use strict';
+
 // Assigning modules to local variables
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');

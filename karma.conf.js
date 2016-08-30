@@ -1,3 +1,5 @@
+'use strict';
+
 // Karma configuration
 // Generated on Tue Jul 12 2016 16:03:55 GMT-0700 (태평양 일광 절약 시간)
 
