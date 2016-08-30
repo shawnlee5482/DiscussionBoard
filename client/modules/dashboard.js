@@ -20,41 +20,45 @@ angular.module('dashboard', ['ngRoute', 'ngCookies', 'login', 'topic', 'user'])
   ])
   .controller('dashboardController', ['$scope', 'loginFactory', 'topicFactory', '$location', function($scope, loginFactory, topicFactory, $location) {
     $scope.getLoggedUser = function() {
-      if(!loginFactory.getLoggedUser()) {
+      if (!loginFactory.getLoggedUser()) {
         $location.url('/login');
-      } else return loginFactory.getLoggedUser();
+      } else {
+        return loginFactory.getLoggedUser();
+      }
     };
 
     $scope.addTopic = function() {
+      // When you're passing this many arguments, it's best practice to change it as only an object
       topicFactory.addTopic($scope.topicName, $scope.imageURL, loginFactory.getLoggedUser(), $scope.topicCategory, $scope.topicDescription)
         .then(function(data) {
-          console.log('topic added properly', data);
-          $scope.topicName = "";
-          $scope.imageURL = "";
-          $scope.topicCategory = "";
-          $scope.topicDescription = "";
+          $scope.topicName = '';
+          $scope.imageURL = '';
+          $scope.topicCategory = '';
+          $scope.topicDescription = '';
 
           return topicFactory.getTopics();
         })
         .then(function(d) {
           $scope.topics = d;
-          console.log($scope.topics);
-        });
+        })
+        .catch(function(err) {
+          // TODO: ERR HANDLING
+        })
     };
 
     $scope.getTopics = function() {
-      console.log("getTopics is called");
       // to fill select option menu for customers
       topicFactory.getTopics()
         .then(function(data) {
           $scope.topics = data;
-          console.log($scope.topics);
+        })
+        .catch(function(err) {
+          // TODO: ERR HANDLING
         });
     };
 
     $scope.onSuccessImage = function(img) {
       $scope.imageURL = img.url;
-      console.log('selected image = ', $scope.imageURL);
     }
 
     $scope.logOut = function() {
