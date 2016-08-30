@@ -1,8 +1,8 @@
 
-<div id="topicDetail" class="container-fluid" ng-controller="topicDetailController" ng-init="getTopicDetails()">
-	<h2 ng-bind="topic.topic"></h2> by <a ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a><hr>
-	<div class="bubble topic"> Description: <label ng-bind="topic.description"></label><br>
-		<img class="img-responsive" ng-src="{{topic.imageURL}}" style="width:400px">
+<div id="topicDetail" class="container-fluid" data-ng-controller="topicDetailController" data-ng-init="getTopicDetails()">
+	<h2 ng-bind="topic.topic"></h2> by <a data-ng-href="/#user/{{topic._user._id}}">{{topic._user.login}}</a><hr>
+	<div class="bubble topic"> Description: <label data-ng-bind="topic.description"></label><br>
+		<img class="img-responsive" data-ng-src="{{topic.imageURL}}" style="width:400px">
 	</div>
 
 	<br>
@@ -11,43 +11,43 @@
 		<form role="form" name="newPostForm" novalidate>
 			<div class="form-group">
 				<label>Post your answer here.</label> <br>
-				<textarea class="form-control" elastic ng-model="post" required></textarea><br>
+				<textarea class="form-control" elastic data-ng-model="post" required></textarea><br>
 			</div>
 			<div class="form-group">
 				<label>Add image</label>
 				<input class="btn btn-default" filepicker type="filepicker"  on-success="onPostSuccessImage(event.fpfile)"/>
 			</div>
-			<img class="img-responsive" ng-show="newPostImageURL" ng-src="{{newPostImageURL}}" style="width:400px"> <br>
-			<button class="btn btn-default" ng-click="addPost(post)" ng-disabled="!newPostForm.$valid">Post</button>
+			<img class="img-responsive" data-ng-show="newPostImageURL" data-ng-src="{{newPostImageURL}}" style="width:400px"> <br>
+			<button class="btn btn-default" data-ng-click="addPost(post)" data-ng-disabled="!newPostForm.$valid">Post</button>
 		</form>
 	</div>
 
 	<hr>
-	<div ng-repeat='post in topic._post'>
+	<div data-ng-repeat='post in topic._post'>
 		<div class="bubble post">
-			<label> <a ng-href="/#user/{{post._user._id}}">{{post._user.login}}</a>  </label>:
-			<label ng-bind='post.postContent'></label> &nbsp <a ng-click="up(post)"><span class="glyphicon glyphicon-thumbs-up"></span> </a>:{{post.upCount}}
-			&nbsp<a ng-click="down(post)"><span class="glyphicon glyphicon-thumbs-down"></span></a>:{{post.downCount}}
-			<br><img  class="img-responsive" ng-src="{{post.imageURL}}" style="width:4">
+			<label> <a data-ng-href="/#user/{{post._user._id}}">{{post._user.login}}</a>  </label>:
+			<label data-ng-bind='post.postContent'></label> &nbsp <a data-ng-click="up(post)"><span class="glyphicon glyphicon-thumbs-up"></span> </a>:{{post.upCount}}
+			&nbsp<a data-ng-click="down(post)"><span class="glyphicon glyphicon-thumbs-down"></span></a>:{{post.downCount}}
+			<br><img  class="img-responsive" data-ng-src="{{post.imageURL}}" style="width:4">
 		</div>
 		<br>
 		<div class="newcomment">
-			<div class = "bubble comment" ng-repeat='comment in post._comments'>
-				<a ng-href="/#user/{{comment._user._id}}">{{comment._user.login}}</a>:{{comment.comment}}
+			<div class = "bubble comment" data-ng-repeat='comment in post._comments'>
+				<a data-ng-href="/#user/{{comment._user._id}}">{{comment._user.login}}</a>:{{comment.comment}}
 			</div>
 
 			<div class="commentform">
 				<form role="form" name="newCommentForm" novalidate="">
 					<div class="form-group">
-						<textarea class="form-control" ng-model="comment" required></textarea><br>
+						<textarea class="form-control" data-ng-model="comment" required></textarea><br>
 					</div>
-					<button class="btn btn-default" ng-click="addComment(post, comment)" ng-disabled="!newCommentForm.$valid">Comment</button><br>
+					<button class="btn btn-default" data-ng-click="addComment(post, comment)" data-ng-disabled="!newCommentForm.$valid">Comment</button><br>
 				</form>
 			</div>
 		</div>
 	</div>
 
 	<ul class="pager">
-		<li class="previous" ng-click="BackToDashboard()"><a>Back to Dashboard</a></li>
+		<li class="previous" data-ng-click="BackToDashboard()"><a>Back to Dashboard</a></li>
 	</ul>
 </div>

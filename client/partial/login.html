@@ -1,5 +1,5 @@
 
-<div id="login" class="container-fluid" ng-controller="loginController">
+<div id="login" class="container-fluid" data-ng-controller="loginController">
     <div class="row text-center">
         <h1>Discussion Board</h1>
     </div>
@@ -12,16 +12,16 @@
             <form class="loginform" role="form" name="loginForm" novalidate>
                 <div class="form-group">
                     <label>Login </label>
-                    <input class="form-control" type="text" ng-model="loginName" placeholder="Enter your login here" required>
+                    <input class="form-control" type="text" data-ng-model="loginName" placeholder="Enter your login here" required>
                 </div>
 
                 <div class="form-group">
                     <label>Password </label>
-                    <input class="form-control" type="password" ng-model="password" placeholder="Enter your password here" required>
+                    <input class="form-control" type="password" data-ng-model="password" placeholder="Enter your password here" required>
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" ng-disabled="!loginForm.$valid" type="submit" value="Submit" ng-click="login()">
+                    <input class="form-control" data-ng-disabled="!loginForm.$valid" type="submit" value="Submit" data-ng-click="login()">
                 </div>
             </form>
 
