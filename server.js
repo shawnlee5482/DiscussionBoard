@@ -1,3 +1,5 @@
+'use strict';
+
 // require express so that we can build an express app
 var express = require('express');
 
@@ -71,6 +73,35 @@ app.use('/user', apiRoutes);
 
 // this line requires and runs the code from our routes.js file and passes it app so that we can attach our routing rules to our express application!
 require('./server/config/routes.js')(app);
+
+// app error handler
+// last middleware so it can handle erros
+app.use(function (err, req, res, next) {
+  // If the error object doesn't exists
+  if (!err) {
+    return next();
+  }
+
+  // Log it
+  console.error(err.stack);
+
+  // Redirect to error page
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message
+  });
+});
+
+
+// if not error, we have a 404 handler
+app.use(function (req, res) {
+ 
+  // Redirect to error page
+  res.status(404).json({
+    success: false,
+    message: 'Not found'
+  });
+});
 
 app.listen(8000, function() {
   console.log('listening on: 8000');
