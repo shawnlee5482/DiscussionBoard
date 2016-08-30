@@ -1,3 +1,4 @@
+'use strict';
 
 var mongoose = require('mongoose');
 var Topics = mongoose.model('Topics');
@@ -26,7 +27,6 @@ module.exports = (function() {
 			});
 		},
 		login: function(req, res, next) {
-
 			Users.findOne({login: req.body.login}, function(err, user) {
 				if (err) {
 					// throwing an error does nothing here, if it's not handled properly
@@ -86,7 +86,6 @@ module.exports = (function() {
 			});
 		},
 		check_duplicate: function(req, res, next) {
-		
 			Users.findOne({login: req.body.login}, function(err, result) {
 				if (err) {
 					return next(err);
@@ -100,7 +99,6 @@ module.exports = (function() {
 			});
 		},
 		get: function(req, res, next) {
-	
 			Users.findOne({_id:req.params.id}, function(err, result) {   // find only one document
 				if (err) {
 				 	return next(err);

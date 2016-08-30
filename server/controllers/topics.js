@@ -1,3 +1,4 @@
+'use strict';
 
 var mongoose = require('mongoose');
 var Topics = mongoose.model('Topics');

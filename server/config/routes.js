@@ -1,65 +1,36 @@
+'use strict';
+
+var topics = require('./../controllers/topics.js');
+var users = require('./../controllers/users.js');
+
   // This is our routes.js file located in server/config/routes.js
   // This is where we will define all of our routing rules!
   // We will have to require this in the server.js file (and pass it app!)
   module.exports = function(app) {
-  	// First, at the top of your routes.js file you'll have to require the controller
-    var topics = require('./../controllers/topics.js');
-
+ 
     // Topics
-    app.get('/topic/:id', function(req, res) {
-      topics.detailInfo(req, res);
-    });
+    app.get('/topic/:id', topics.detailInfo);
 
-    app.post('/topic/:id', function(req, res) {
-      topics.addPost(req, res);
-    });
+    app.post('/topic/:id', topics.addPost);
 
-    app.get('/post/:id/up', function(req, res) {
-      topics.up(req, res);
-    });
+    app.get('/post/:id/up', topics.up);
 
-    app.get('/post/:id/down', function(req, res) {
-      topics.down(req, res);
-    });
+    app.get('/post/:id/down', topics.down);
 
-    app.post('/post/:id', function(req, res) {
-      topics.addComment(req, res);
-    });
+    app.post('/post/:id', topics.addComment);
 
-    app.get('/topics', function(req, res) {     
-      topics.index(req, res);
-    }); 
+    app.get('/topics', topics.index);
 
-    app.post('/topics', function(req, res) { 
-      console.log('app.post', req.body.category, req.body.topic, req.body._user, req.body.description);    
-      topics.create(req, res);
-    }); 
+    app.post('/topics', topics.create);
 
-    // First, at the top of your routes.js file you'll have to require the controller
-    var users = require('./../controllers/users.js');
+    // TODO: User routes should be in their own file
+    app.get('/signup', users.dummyCreate);
 
-    // temporary code
-    app.get('/signup',function(req, res) {
-      users.dummyCreate(req,res);
-    });
+    app.post('/login', users.login);
 
-    app.post('/login',function(req, res) {
-      try {
-        users.login(req, res, app);
-      } catch (e) {
-        res.json({success: false, message: e});
-      }
-    });
+    app.post('/users/check_duplicate', users.check_duplicate);
 
-    app.post('/users/check_duplicate', function(req, res) {
-      users.check_duplicate(req, res);
-    });
+    app.post('/users', users.create);
 
-    app.post('/users', function(req, res) {
-      users.create(req, res);
-    });
-
-    app.get('/user/:id', function(req, res) {
-      users.get(req, res);
-    });
+    app.get('/user/:id', users.get);
 };
