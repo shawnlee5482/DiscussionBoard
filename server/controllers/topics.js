@@ -7,7 +7,7 @@ var Comment = mongoose.model('Comments');
 module.exports = (function() {
 	return {
 		up: function(req, res, next) {
-			Post.findOneAndUpdate({ _id:req.params.id }, { $inc: { upCount: 1 } })
+			Post.findOneAndUpdate({ _id: req.params.id }, { $inc: { upCount: 1 } })
 			  .select('upcount')
 			  .exec(function(err, data) { 
 			    if (err) { 
@@ -18,24 +18,15 @@ module.exports = (function() {
 			  });
 		},
 		down: function(req, res) {
-			Post.findOne({_id:req.params.id}, function(err, result) {
-				if(err) {
-					console.log('there is an error in Post.findOne - down');					
-					res.json(err);
-				} else {
-					result.downCount++;
-					console.log('server topic controller down', result.downCount);
-					result.save(function(err) {
-						if(err) {
-							console.log('server topic controller up save error');
-							res.json(err);							
-						} else {
-							console.log('server topic controller up save Successfully');
-							res.json({downCount:result.downCount});							
-						}
-					});
-				}
-			});
+			Post.findOneAndUpdate({ _id: req.params.id }, { $inc: { upCount: -1 } })
+			  .select('upcount')
+			  .exec(function(err, data) { 
+			    if (err) { 
+			      return next(err);
+			    } else { 
+			      res.json(data);			
+			    } 
+			  });
 		},
 		index: function(req, res) {
 			Topics.find({})
