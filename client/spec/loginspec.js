@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Login Test', function() {
 	var res = null;
 
@@ -15,7 +17,6 @@ describe('Login Test', function() {
 		});
 		$httpBackend.flush();
 
-		console.log('res = ', res);
 		expect(res).not.toBeNull();
 	}));
 
@@ -24,15 +25,13 @@ describe('Login Test', function() {
 		var $httpBackend = _$httpBackend_;		
 		var login = "test";
 
-
 		$httpBackend.when('POST', '/users').respond({login: login});
 
 		loginFactory.login(login, function(output) {
 			res = output;
 		});
 		$httpBackend.flush();
-		console.log('res = ', res);
-		console.log('res = ', res);
+
 		expect(res.login).toEqual("test");
 	}));	
 
@@ -44,15 +43,12 @@ describe('Login Test', function() {
 
 		$httpBackend.when('POST', '/users').respond(500, null);
 
-
 		loginFactory.login(login, function(output) {
-			console.log('never comes here');
 			res = output;
 		});
 
 		$httpBackend.flush();
-
-		console.log('res = ', res);
+		
 		expect(res).toBeNull();
 	}));	
 });

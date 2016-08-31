@@ -1,21 +1,21 @@
-<div class="container-fluid"  ng-controller="userProfileController" ng-init="getUserProfile()">
-	<h3> <span class="glyphicon glyphicon-user"> </span> User Info </h3>
-	<table class="table table-responsive">
-		<thead>
-			<tr>
-				<th>Login</th>
-				<th>Topic</th>
-				<th>Post</th>
-				<th>Comment</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td ng-bind="login"></td>
-				<td ng-bind="topic"></td>
-				<td ng-bind="post"></td>
-				<td ng-bind="comment"></td>
-			</tr>
-		</tbody>
-	</table>
+<div class="container-fluid" data-ng-controller="userProfileController" data-ng-init="getUserProfile()">
+  <h3> <span class="glyphicon glyphicon-user"> </span> User Info </h3>
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th>Login</th>
+        <th>Topic</th>
+        <th>Post</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-ng-bind="login"></td>
+        <td data-ng-bind="topic"></td>
+        <td data-ng-bind="post"></td>
+        <td data-ng-bind="comment"></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
