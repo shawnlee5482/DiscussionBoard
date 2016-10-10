@@ -1,6 +1,6 @@
 # DiscussionBoard
 
-Discussion board is an application for sharing thoughts.
+Discussion board is an application for sharing thoughts between people.
 
 <img src="discussionboard_login.png">
 <img src="discussionboard_topicdetail.png">
